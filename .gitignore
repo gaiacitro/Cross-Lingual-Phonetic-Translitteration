@@ -4,6 +4,7 @@
 # Eccezioni: includi i file .py e .dict
 !*.py
 !*.dict
+!*.txt
 
 # Opzionale ma raccomandato: evita di ignorare il file .gitignore stesso
 !.gitignore
