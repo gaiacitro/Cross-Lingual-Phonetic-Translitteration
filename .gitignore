@@ -1,0 +1,9 @@
+# Ignora tutti i file e le cartelle
+*
+
+# Eccezioni: includi i file .py e .dict
+!*.py
+!*.dict
+
+# Opzionale ma raccomandato: evita di ignorare il file .gitignore stesso
+!.gitignore
