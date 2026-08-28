@@ -7,3 +7,5 @@
 
 # Opzionale ma raccomandato: evita di ignorare il file .gitignore stesso
 !.gitignore
+
+bart_bpe_best_model/
