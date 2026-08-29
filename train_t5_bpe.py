@@ -1,17 +1,14 @@
 import json
 import torch
-import torch.nn as nn
 import jiwer
 from torch.utils.data import Dataset, DataLoader, random_split
 from torch.nn.utils.rnn import pad_sequence
 from torch.optim import AdamW
 from tqdm import tqdm
+from transformers import T5ForConditionalGeneration, T5Config
 
 from tokenization import BPETokenizer, CharTokenizer
 
-# ==========================================
-# 1 & 2. DATASET E COLLATION (IDENTICI A BART)
-# ==========================================
 class TransliterationDataset(Dataset):
     def __init__(self, jsonl_file_path: str):
         self.data_pairs = []
@@ -51,77 +48,6 @@ def get_collate_fn(encoder_tokenizer, decoder_tokenizer):
         }
     return collate_fn
 
-# ==========================================
-# ARCHITETTURA GRU CUSTOM
-# ==========================================
-class Seq2SeqGRU(nn.Module):
-    """Architettura Encoder-Decoder basata su GRU che simula l'interfaccia HuggingFace."""
-    def __init__(self, enc_vocab_size, dec_vocab_size, pad_idx, hidden_size=256, num_layers=2):
-        super().__init__()
-        self.pad_idx = pad_idx
-        
-        # Encoder
-        self.enc_embedding = nn.Embedding(enc_vocab_size, hidden_size, padding_idx=pad_idx)
-        self.encoder = nn.GRU(hidden_size, hidden_size, num_layers, batch_first=True)
-        
-        # Decoder
-        self.dec_embedding = nn.Embedding(dec_vocab_size, hidden_size, padding_idx=pad_idx)
-        self.decoder = nn.GRU(hidden_size, hidden_size, num_layers, batch_first=True)
-        self.fc_out = nn.Linear(hidden_size, dec_vocab_size)
-        
-        self.loss_fct = nn.CrossEntropyLoss(ignore_index=-100)
-
-    def forward(self, input_ids, attention_mask=None, labels=None):
-        # Passaggio nell'Encoder
-        enc_embeds = self.enc_embedding(input_ids)
-        _, hidden = self.encoder(enc_embeds)
-        
-        # Passaggio nel Decoder (Teacher Forcing)
-        # Shiftiamo le labels a destra per l'input del decoder
-        dec_input = labels[:, :-1].clone()
-        dec_input[dec_input == -100] = self.pad_idx # Rimuoviamo i -100 per l'embedding
-        
-        dec_embeds = self.dec_embedding(dec_input)
-        dec_outputs, _ = self.decoder(dec_embeds, hidden)
-        logits = self.fc_out(dec_outputs)
-        
-        loss = None
-        if labels is not None:
-            # Calcolo della loss confrontando i logits con le labels shiftate
-            target = labels[:, 1:].contiguous().view(-1)
-            loss = self.loss_fct(logits.view(-1, logits.size(-1)), target)
-            
-        class Output: pass
-        out = Output()
-        out.loss = loss
-        out.logits = logits
-        return out
-
-    def generate(self, input_ids, attention_mask, max_length, bos_token_id, eos_token_id, pad_token_id):
-        """Generazione autoregressiva per l'inferenza e la validazione."""
-        batch_size = input_ids.size(0)
-        device = input_ids.device
-        
-        enc_embeds = self.enc_embedding(input_ids)
-        _, hidden = self.encoder(enc_embeds)
-        
-        dec_input = torch.tensor([[bos_token_id]] * batch_size, device=device)
-        generated_ids = []
-        
-        for _ in range(max_length):
-            dec_embeds = self.dec_embedding(dec_input)
-            output, hidden = self.decoder(dec_embeds, hidden)
-            logits = self.fc_out(output[:, -1, :])
-            next_token = logits.argmax(1).unsqueeze(1)
-            
-            generated_ids.append(next_token)
-            dec_input = next_token
-            
-        return torch.cat(generated_ids, dim=1)
-
-# ==========================================
-# 3. METRICHE E VALUTAZIONE
-# ==========================================
 def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
     model.eval()
     total_loss = 0.0
@@ -142,7 +68,6 @@ def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
                 input_ids=input_ids,
                 attention_mask=attention_mask,
                 max_length=50,
-                bos_token_id=decoder_tokenizer.sp.bos_id(),
                 eos_token_id=decoder_tokenizer.sp.eos_id(),
                 pad_token_id=decoder_tokenizer.sp.pad_id()
             )
@@ -162,10 +87,7 @@ def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
     cer = jiwer.wer(all_references, all_predictions) if all_references else 0.0
     return avg_loss, cer
 
-# ==========================================
-# 4. TRAINING PIPELINE (IDENTICA A BART)
-# ==========================================
-def train_gru_architecture():
+def train_t5_architecture():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Executing on computational device: {device}")
 
@@ -184,22 +106,16 @@ def train_gru_architecture():
     train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True, collate_fn=collate_function)
     val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False, collate_fn=collate_function)
 
-    print(f"Dataset partitioned. Training instances: {train_size} | Validation instances: {val_size}")
-
-    # Inizializzazione della nostra architettura GRU
-    enc_vocab = encoder_tokenizer.sp.get_piece_size()
-    dec_vocab = decoder_tokenizer.sp.get_piece_size()
+    # Inizializziamo T5 slegando gli embedding per i due vocabolari
+    config = T5Config.from_pretrained("t5-small")
+    config.vocab_size = encoder_tokenizer.sp.get_piece_size()
+    config.tie_word_embeddings = False
     
-    model = Seq2SeqGRU(
-        enc_vocab_size=enc_vocab, 
-        dec_vocab_size=dec_vocab, 
-        pad_idx=encoder_tokenizer.sp.pad_id()
-    )
+    model = T5ForConditionalGeneration(config)
     model.to(device)
 
     optimizer = AdamW(model.parameters(), lr=5e-4)
     num_epochs = 10
-
     patience = 3
     patience_counter = 0
     best_val_cer = float('inf')
@@ -211,14 +127,12 @@ def train_gru_architecture():
         
         for batch in train_iterator:
             optimizer.zero_grad()
-            
             input_ids = batch['input_ids'].to(device)
             attention_mask = batch['attention_mask'].to(device)
             labels = batch['labels'].to(device)
             
             outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
             loss = outputs.loss
-            
             loss.backward()
             optimizer.step()
             
@@ -233,18 +147,14 @@ def train_gru_architecture():
         if val_cer < best_val_cer:
             best_val_cer = val_cer
             patience_counter = 0
-            # Salvataggio custom dei pesi di PyTorch
-            torch.save(model.state_dict(), "gru_bpe_best_model.pth")
+            model.save_pretrained("./t5_bpe_best_model")
             print(f"New best model found (CER: {best_val_cer:.4f})! Weights serialized.")
         else:
             patience_counter += 1
             print(f"No improvement in CER. Patience: {patience_counter}/{patience}")
-            
             if patience_counter >= patience:
                 print(f"Early stopping triggered at epoch {epoch+1}.")
                 break
 
-    print("Training protocol concluded. State dictionary preserved as 'gru_bpe_best_model.pth'.")
-
 if __name__ == "__main__":
-    train_gru_architecture()
+    train_t5_architecture()
