@@ -10,7 +10,7 @@ from tqdm import tqdm
 from tokenization import BPETokenizer, CharTokenizer
 
 # ==========================================
-# 1 & 2. DATASET E COLLATION 
+# 1 & 2. DATASET E COLLATION
 # ==========================================
 class TransliterationDataset(Dataset):
     def __init__(self, jsonl_file_path: str):
@@ -52,92 +52,81 @@ def get_collate_fn(encoder_tokenizer, decoder_tokenizer):
     return collate_fn
 
 # ==========================================
-# ARCHITETTURA: GRU CON BAHDANAU ATTENTION
+# ARCHITETTURA: BLSTM SENZA ATTENTION
 # ==========================================
-class Seq2SeqAttentionGRU(nn.Module):
+class Seq2SeqBLSTM(nn.Module):
     def __init__(self, enc_vocab_size, dec_vocab_size, pad_idx, hidden_size=256, num_layers=1):
         super().__init__()
         self.pad_idx = pad_idx
-        self.hidden_size = hidden_size
         
-        # Encoder
+        # Encoder (Bidirezionale)
         self.enc_embedding = nn.Embedding(enc_vocab_size, hidden_size, padding_idx=pad_idx)
-        self.encoder = nn.GRU(hidden_size, hidden_size, num_layers, batch_first=True)
+        self.encoder = nn.LSTM(hidden_size, hidden_size, num_layers, bidirectional=True, batch_first=True)
         
-        # Attention Layers (Bahdanau)
-        self.attention = nn.Linear(hidden_size * 2, hidden_size)
-        self.v = nn.Linear(hidden_size, 1, bias=False)
-        
-        # Decoder
+        # Decoder (Unidirezionale)
         self.dec_embedding = nn.Embedding(dec_vocab_size, hidden_size, padding_idx=pad_idx)
-        # Il decoder prende in input l'embedding corrente + il contesto dell'attenzione
-        self.decoder = nn.GRU(hidden_size * 2, hidden_size, num_layers, batch_first=True)
+        self.decoder = nn.LSTM(hidden_size, hidden_size, num_layers, batch_first=True)
         self.fc_out = nn.Linear(hidden_size, dec_vocab_size)
+        
+        # Strati per comprimere gli stati nascosti bidirezionali (2 * hidden_size) nella dimensione del decoder (hidden_size)
+        self.hidden_transform = nn.Linear(hidden_size * 2, hidden_size)
+        self.cell_transform = nn.Linear(hidden_size * 2, hidden_size)
         
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-100)
 
-    def _calculate_attention(self, hidden, enc_outputs, attention_mask):
-        # Ripetiamo l'hidden state del decoder per tutta la lunghezza della sequenza encoder
-        h_t = hidden[-1].unsqueeze(1).repeat(1, enc_outputs.size(1), 1)
-        
-        # Calcolo dell'energia e dei pesi
-        energy = torch.tanh(self.attention(torch.cat((h_t, enc_outputs), dim=2)))
-        attention_weights = torch.softmax(self.v(energy).squeeze(2), dim=1)
-        
-        if attention_mask is not None:
-            attention_weights = attention_weights.masked_fill(attention_mask == 0, 1e-10)
-            attention_weights = attention_weights / attention_weights.sum(dim=1, keepdim=True)
-            
-        # Vettore di contesto
-        context = torch.bmm(attention_weights.unsqueeze(1), enc_outputs)
-        return context
-
     def forward(self, input_ids, attention_mask=None, labels=None):
-        batch_size = input_ids.size(0)
+        # 1. Passaggio nell'Encoder
         enc_embeds = self.enc_embedding(input_ids)
-        enc_outputs, hidden = self.encoder(enc_embeds)
+        _, (hidden, cell) = self.encoder(enc_embeds)
         
+        # 2. Compressione per il Decoder
+        hidden_cat = torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim=1)
+        cell_cat = torch.cat((cell[-2,:,:], cell[-1,:,:]), dim=1)
+        
+        hidden = torch.tanh(self.hidden_transform(hidden_cat)).unsqueeze(0)
+        cell = torch.tanh(self.cell_transform(cell_cat)).unsqueeze(0)
+        
+        # 3. Preparazione delle labels per il Teacher Forcing
         dec_input = labels[:, :-1].clone()
         dec_input[dec_input == -100] = self.pad_idx 
-        seq_len = dec_input.size(1)
-        
         dec_embeds = self.dec_embedding(dec_input)
-        logits = torch.zeros(batch_size, seq_len, self.fc_out.out_features).to(input_ids.device)
         
-        # Loop passo-passo per il Teacher Forcing con Attention
-        for t in range(seq_len):
-            context = self._calculate_attention(hidden, enc_outputs, attention_mask)
-            rnn_input = torch.cat((dec_embeds[:, t:t+1, :], context), dim=2)
-            out, hidden = self.decoder(rnn_input, hidden)
-            logits[:, t, :] = self.fc_out(out.squeeze(1))
-            
+        # 4. Generazione parallela (molto più veloce senza Attention!)
+        out, _ = self.decoder(dec_embeds, (hidden, cell))
+        logits = self.fc_out(out)
+        
         loss = None
         if labels is not None:
             target = labels[:, 1:].contiguous().view(-1)
             loss = self.loss_fct(logits.view(-1, logits.size(-1)), target)
             
         class Output: pass
-        out = Output()
-        out.loss = loss
-        out.logits = logits
-        return out
+        out_obj = Output()
+        out_obj.loss = loss
+        out_obj.logits = logits
+        return out_obj
 
     def generate(self, input_ids, attention_mask, max_length, bos_token_id, eos_token_id, pad_token_id):
         batch_size = input_ids.size(0)
         device = input_ids.device
         
+        # Compressione dell'encoder
         enc_embeds = self.enc_embedding(input_ids)
-        enc_outputs, hidden = self.encoder(enc_embeds)
+        _, (hidden, cell) = self.encoder(enc_embeds)
         
+        hidden_cat = torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim=1)
+        cell_cat = torch.cat((cell[-2,:,:], cell[-1,:,:]), dim=1)
+        
+        hidden = torch.tanh(self.hidden_transform(hidden_cat)).unsqueeze(0)
+        cell = torch.tanh(self.cell_transform(cell_cat)).unsqueeze(0)
+        
+        # Generazione carattere per carattere
         dec_input = torch.tensor([[bos_token_id]] * batch_size, device=device)
         generated_ids = []
         
         for _ in range(max_length):
             dec_embeds = self.dec_embedding(dec_input)
-            context = self._calculate_attention(hidden, enc_outputs, attention_mask)
-            
-            rnn_input = torch.cat((dec_embeds, context), dim=2)
-            output, hidden = self.decoder(rnn_input, hidden)
+            output, (hidden, cell) = self.decoder(dec_embeds, (hidden, cell))
             
             logits = self.fc_out(output[:, -1, :])
             next_token = logits.argmax(1).unsqueeze(1)
@@ -192,7 +181,7 @@ def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
 # ==========================================
 # 4. TRAINING PIPELINE
 # ==========================================
-def train_gru_attention_architecture():
+def train_blstm_no_attn_architecture():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Executing on computational device: {device}")
 
@@ -214,8 +203,7 @@ def train_gru_attention_architecture():
     enc_vocab = encoder_tokenizer.sp.get_piece_size()
     dec_vocab = decoder_tokenizer.sp.get_piece_size()
     
-    # Inizializza la nuova architettura
-    model = Seq2SeqAttentionGRU(
+    model = Seq2SeqBLSTM(
         enc_vocab_size=enc_vocab, 
         dec_vocab_size=dec_vocab, 
         pad_idx=encoder_tokenizer.sp.pad_id()
@@ -258,7 +246,7 @@ def train_gru_attention_architecture():
         if val_cer < best_val_cer:
             best_val_cer = val_cer
             patience_counter = 0
-            torch.save(model.state_dict(), "gru_attn_best_model.pth")
+            torch.save(model.state_dict(), "blstm_no_attn_bpe_best.pth")
             print(f"New best model found (CER: {best_val_cer:.4f})! Weights serialized.")
         else:
             patience_counter += 1
@@ -269,4 +257,4 @@ def train_gru_attention_architecture():
                 break
 
 if __name__ == "__main__":
-    train_gru_attention_architecture()
+    train_blstm_no_attn_architecture()
