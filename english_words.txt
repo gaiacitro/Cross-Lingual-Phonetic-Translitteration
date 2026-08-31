@@ -996,7 +996,6 @@ adaptaplex
 adaptation
 adaptations
 adaptations(2)
-adaptec
 adaptec's
 adapted
 adapter

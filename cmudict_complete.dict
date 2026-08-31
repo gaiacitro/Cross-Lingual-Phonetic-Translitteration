@@ -996,7 +996,7 @@ adaptaplex AH0 D AE1 P T AH0 P L EH2 K S
 adaptation AE2 D AH0 P T EY1 SH AH0 N
 adaptations AE2 D AE0 P T EY1 SH AH0 N Z
 adaptations(2) AE2 D AH0 P T EY1 SH AH0 N Z
-#adaptec AH0 D AE1 P T EH2 K
+adaptec AH0 D AE1 P T EH2 K
 adaptec's AH0 D AE1 P T EH2 K S
 adapted AH0 D AE1 P T IH0 D
 adapter AH0 D AE1 P T ER0
@@ -1338,8 +1338,8 @@ adtec AE1 D T EH2 K
 adulate AE1 JH AH0 L EY2 T
 adulation AE2 JH AH0 L EY1 SH AH0 N
 aduliadae AH0 D UW2 L IY0 AA1 D EY0
-#adult AH0 D AH1 L T
-#adult(2) AE1 D AH0 L T
+adult AH0 D AH1 L T
+adult(2) AE1 D AH0 L T
 adulterate AH0 D AH1 L T ER0 EY2 T
 adulterated AH0 D AH1 L T ER0 EY2 T IH0 D
 adulterates AH0 D AH1 L T ER0 EY2 T S
@@ -1997,7 +1997,7 @@ ahn AE1 N
 ahnell AA0 N EH1 L
 ahner AA1 N ER0
 aho AA1 HH OW0
-#ahola AE1 HH AH0 L AH0
+ahola AE1 HH AH0 L AH0
 ahold AH0 HH OW1 L D
 ahold's AH0 HH OW1 L D Z
 aholds AH0 HH OW1 L D Z
@@ -2996,8 +2996,8 @@ alls AO1 L Z
 allsbrook AO1 L Z B R UH2 K
 allsbrook(2) AO1 L T S B R UH2 K
 allset AO0 L S EH1 T
-#allshouse AO1 L Z HH AW2 S
-#allshouse(2) AO1 L T S HH AW2 S
+allshouse AO1 L Z HH AW2 S
+allshouse(2) AO1 L T S HH AW2 S
 allsop AO1 L S AA2 P
 allsopp AO1 L S AA2 P
 allspice AO1 L S P AY2 S
@@ -3996,8 +3996,8 @@ anchormen AE1 NG K ER0 M EH1 N
 anchors AE1 NG K ER0 Z
 anchovies AE0 N CH OW1 V IY0 Z
 anchovies(2) AE1 N CH OW2 V IY0 Z
-#anchovy AE0 N CH OW1 V IY0
-#anchovy(2) AE1 N CH OW2 V IY0
+anchovy AE0 N CH OW1 V IY0
+anchovy(2) AE1 N CH OW2 V IY0
 ancient EY1 N CH AH0 N T
 ancient(2) EY1 N SH AH0 N T
 ancients EY1 N CH AH0 N T S
@@ -4789,7 +4789,7 @@ anwell AH0 N W EH1 L
 anwyl AE1 N W IH0 L
 anwyll AE1 N W IH0 L
 anxieties AE0 NG Z AY1 AH0 T IY0 Z
-#anxiety AE0 NG Z AY1 AH0 T IY0
+anxiety AE0 NG Z AY1 AH0 T IY0
 anxious AE1 NG K SH AH0 S
 anxious(2) AE1 NG SH AH0 S
 anxiously AE1 NG K SH AH0 S L IY0
@@ -4997,7 +4997,7 @@ appendectomy AE2 P IH0 N D EH1 K T AH0 M IY0
 appended AH0 P EH1 N D IH0 D
 appendices AH0 P EH1 N D IH0 S IY2 Z
 appendicitis AH0 P EH2 N D IH2 S AY1 T IH0 Z
-#appendix AH0 P EH1 N D IH0 K S
+appendix AH0 P EH1 N D IH0 K S
 appendixes AH0 P EH1 N D IH0 K S IH0 Z
 appenzeller AE1 P IH0 N Z AH0 L ER0
 apperson AE1 P ER0 S AH0 N
@@ -5997,7 +5997,7 @@ arvidson AA1 R V IH0 D S AH0 N
 arvin AA1 R V IH0 N
 arvin's AA1 R V IH0 N Z
 arvind AA1 R V IH0 N D
-#arvizu AA0 R V IY1 Z UW0
+arvizu AA0 R V IY1 Z UW0
 arwen AA1 R W AH0 N
 arwood AA1 R W UH2 D
 arx AA1 R K S
@@ -6520,10 +6520,10 @@ atherosclerosis AE2 TH ER0 OW0 S K L ER0 OW1 S IH0 S
 atherton AE1 TH ER0 T AH0 N
 athey AE1 TH IY0
 athie EY1 TH IY0
-#athlete AE1 TH L IY2 T
-#athlete's AE1 TH L IY2 T S
-#athletes AE1 TH L IY2 T S
-#athletes' AE1 TH L IY2 T S
+athlete AE1 TH L IY2 T
+athlete's AE1 TH L IY2 T S
+athletes AE1 TH L IY2 T S
+athletes' AE1 TH L IY2 T S
 athletic AE0 TH L EH1 T IH0 K
 athletically AE0 TH L EH1 T IH0 K L IY0
 athleticism AE0 TH L EH1 T IH0 S IH2 Z M
@@ -6880,16 +6880,16 @@ aumiller AW1 M AH0 L ER0
 aune AO1 N
 aung AO1 NG
 aungst AW1 NG G S T
-#aunt AE1 N T
-#aunt(2) AO1 N T
-#aunt's AE1 N T S
-#aunt's(2) AO1 N T S
+aunt AE1 N T
+aunt(2) AO1 N T
+aunt's AE1 N T S
+aunt's(2) AO1 N T S
 auntie AE1 N T IY0
 auntie(2) AO1 N T IY0
-#aunts AE1 N T S
-#aunts(2) AO1 N T S
-#aunts' AE1 N T S
-#aunts'(2) AO1 N T S
+aunts AE1 N T S
+aunts(2) AO1 N T S
+aunts' AE1 N T S
+aunts'(2) AO1 N T S
 aupperle AW1 P ER0 L IY0
 aura AO1 R AH0
 aural AO1 R AH0 L
@@ -7284,8 +7284,8 @@ awfully AA1 F L IY0
 awfully(2) AO1 F AH0 L IY0
 awfulness AO1 F AH0 L N AH0 S
 awhile AH0 W AY1 L
-#awkward AA1 K W ER0 D
-#awkward(2) AO1 K W ER0 D
+awkward AA1 K W ER0 D
+awkward(2) AO1 K W ER0 D
 awkwardly AO1 K W ER0 D L IY0
 awkwardness AO1 K W ER0 D N AH0 S
 awning AA1 N IH0 NG
@@ -9593,13 +9593,13 @@ beanblossom B IY1 N B L AH0 S AH0 M
 beane B IY1 N
 beans B IY1 N Z
 beantown B IY1 N T AW2 N
-#bear B EH1 R
-#bear's B EH1 R Z
+bear B EH1 R
+bear's B EH1 R Z
 beara B EH1 R AH0
-bearablBeard e B EH1 R AH0 B AH0 L
+bearable B EH1 R AH0 B AH0 L
 bearably B EH1 R AH0 B L IY0
 bearce B ER1 S
-#beard B IH1 R D
+beard B IH1 R D
 bearded B IH1 R D AH0 D
 bearden B IH1 R D AH0 N
 beardmore B IH1 R D M AO2 R
@@ -12571,8 +12571,8 @@ blondest B L AA1 N D AH0 S T
 blondie B L AA1 N D IY0
 blondin B L AA1 N D IH0 N
 blonds B L AA1 N D Z
-#blood B L AH1 D
-#blood's B L AH1 D Z
+blood B L AH1 D
+blood's B L AH1 D Z
 bloodbath B L AH1 D B AE2 TH
 blooded B L AH1 D IH0 D
 bloodgood B L AH1 D G UH2 D
@@ -13707,7 +13707,7 @@ bordonaro B AO0 R D OW0 N AA1 R OW0
 bordwell B AO1 R D W EH0 L
 bore B AO1 R
 borealis B AO2 R IY0 AE1 L AH0 S
-#bored B AO1 R D
+bored B AO1 R D
 boredom B AO1 R D AH0 M
 borek B AO1 R IH0 K
 borel B AO1 R AH0 L
@@ -14840,7 +14840,7 @@ breastfeeds B R EH1 S T F IY0 D Z
 breasting B R EH1 S T IH0 NG
 breastplate B R EH1 S T P L EY2 T
 breasts B R EH1 S T S
-#breath B R EH1 TH
+breath B R EH1 TH
 breathe B R IY1 DH
 breathed B R IY1 DH D
 breather B R IY1 DH ER0
