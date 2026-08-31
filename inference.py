@@ -86,6 +86,9 @@ def run_inference(selected_model: str):
         lines = f.readlines() 
                 
         for line in tqdm(lines, desc="Processamento", leave=False):
+            if not line.strip():
+                continue
+                
             data = json.loads(line.strip())
             english_word = data['english_word']
             ground_truth = data['italian_transliteration']
