@@ -194,7 +194,24 @@ def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
                 pad_token_id=decoder_tokenizer.sp.pad_id()
             )
 
+            # Decode generation output and truncate at <eos>
             for gen_ids, ref_text in zip(generated_ids, target_texts):
+                clean_ids = []
+                for token_id in gen_ids:
+                    t_id = token_id.item()
+                    # if we reach the <eos> token, we stop decoding
+                    if t_id == decoder_tokenizer.sp.eos_id():
+                        break
+                    # if we encounter padding or bos tokens, we ignore them
+                    if t_id not in [decoder_tokenizer.sp.pad_id(), decoder_tokenizer.sp.bos_id()]:
+                        clean_ids.append(t_id)
+                
+                pred_text = decoder_tokenizer.decode(clean_ids)
+                all_predictions.append(" ".join(list(pred_text)))
+                all_references.append(" ".join(list(ref_text)))
+
+
+            '''for gen_ids, ref_text in zip(generated_ids, target_texts):
                 clean_ids = [
                     token_id.item() for token_id in gen_ids 
                     if token_id not in [decoder_tokenizer.sp.pad_id(), 
@@ -203,7 +220,7 @@ def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
                 ]
                 pred_text = decoder_tokenizer.decode(clean_ids)
                 all_predictions.append(" ".join(list(pred_text)))
-                all_references.append(" ".join(list(ref_text)))
+                all_references.append(" ".join(list(ref_text)))'''
 
     avg_loss = total_loss / len(dataloader)
     cer = jiwer.wer(all_references, all_predictions) if all_references else 0.0
