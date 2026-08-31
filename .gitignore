@@ -5,6 +5,7 @@
 !*.py
 !*.dict
 !*.txt
+!test.jsonl
 
 # Opzionale ma raccomandato: evita di ignorare il file .gitignore stesso
 !.gitignore
