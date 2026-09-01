@@ -76,18 +76,19 @@ def run_inference(selected_model: str):
     # ==========================================
     # 3. LETTURA FILE E GENERAZIONE
     # ==========================================
-    TEST_FILE = "transliteration_dataset.jsonl" 
+    TEST_FILE = "test.jsonl" 
     
     predictions = []
     references = []
 
     print("\nGenerazione delle traslitterazioni in corso...")
     with open(TEST_FILE, 'r', encoding='utf-8') as f:
-        # Leggiamo solo i primi 50 record per un'analisi visiva veloce.
-        # Rimuovi "[:50]" per calcolare il CER sull'intero file.
-        lines = f.readlines()[:50] 
-        
+        lines = f.readlines() 
+                
         for line in tqdm(lines, desc="Processamento", leave=False):
+            if not line.strip():
+                continue
+                
             data = json.loads(line.strip())
             english_word = data['english_word']
             ground_truth = data['italian_transliteration']

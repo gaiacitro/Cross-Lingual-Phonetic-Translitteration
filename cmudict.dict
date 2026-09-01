@@ -15633,19 +15633,19 @@ brostrom B R AA1 S T R AH0 M
 brosz B R AA1 SH
 broten B R OW1 T AH0 N
 broth B R AO1 TH
-brothel B R AA1 TH AH0 L
+#brothel B R AA1 TH AH0 L
 brothels B R AA1 TH AH0 L Z
-brother B R AH1 DH ER0
-brother's B R AH1 DH ER0 Z
-brother-in-law B R AH1 DH ER0 IH0 N L AO2
-brotherhood B R AH1 DH ER0 HH UH2 D
-brotherly B R AH1 DH ER0 L IY0
-brothers B R AH1 DH ER0 Z
-brothers' B R AH1 DH ER0 Z
-brothers's B R AH1 DH ER0 Z IH0 Z
-brothers-in-law B R AH1 DH ER0 Z IH0 N L AO2
-brotherson B R AH1 DH ER0 S AH0 N
-brotherton B R AH1 DH ER0 T AH0 N
+#brother B R AH1 DH ER0
+#brother's B R AH1 DH ER0 Z
+#brother-in-law B R AH1 DH ER0 IH0 N L AO2
+#brotherhood B R AH1 DH ER0 HH UH2 D
+#brotherly B R AH1 DH ER0 L IY0
+#brothers B R AH1 DH ER0 Z
+#brothers' B R AH1 DH ER0 Z
+#brothers's B R AH1 DH ER0 Z IH0 Z
+#brothers-in-law B R AH1 DH ER0 Z IH0 N L AO2
+#brotherson B R AH1 DH ER0 S AH0 N
+#brotherton B R AH1 DH ER0 T AH0 N
 broths B R AO1 TH S
 brotman B R AA1 T M AH0 N
 brott B R AA1 T
@@ -22494,8 +22494,8 @@ clotfelter K L AA1 T F EH2 L T ER0
 cloth K L AO1 TH
 clothe K L OW1 DH
 clothed K L OW1 DH D
-clothes K L OW1 DH Z
-clothes(2) K L OW1 Z
+#clothes K L OW1 DH Z
+#clothes(2) K L OW1 Z
 clotheshorse K L OW1 Z HH AO2 R S
 clothestime K L OW1 DH Z T AY1 M
 clothier K L OW1 DH Y ER0
@@ -23499,7 +23499,7 @@ comex's K AA1 M EH2 K S IH0 Z
 comfed K AA1 M F EH2 D
 comfinance K AA1 M F IH0 N AH0 N S
 comfort K AH1 M F ER0 T
-comfortable K AH1 M F ER0 T AH0 B AH0 L
+#comfortable K AH1 M F ER0 T AH0 B AH0 L
 comfortably K AH1 M F ER0 T AH0 B L IY0
 comforted K AH1 M F ER0 T IH0 D
 comforter K AH1 M F ER0 T ER0
@@ -97359,8 +97359,8 @@ questran K W EH1 S T R AE2 N
 questrom K W EH1 S T R AH0 M
 quests K W EH1 S T S
 quetzalcoatl K EH1 T S AA0 L K W AO2 T L
-queue K Y UW1
-queues K Y UW1 Z
+#queue K Y UW1
+#queues K Y UW1 Z
 queuing K Y UW1 IH0 NG
 quevedo K W EY0 V EY1 D OW0
 quezada K W EY0 Z AA1 D AH0
@@ -111522,12 +111522,12 @@ sisson S IH1 S AH0 N
 sissy S IH1 S IY0
 sistare S IY0 S T AA1 R IY0
 sistek S IH1 S T IH0 K
-sister S IH1 S T ER0
-sister's S IH1 S T ER0 Z
-sister-in-law S IH1 S T ER0 IH0 N L AO2
-sisterhood S IH1 S T ER0 HH UH0 D
-sisters S IH1 S T ER0 Z
-sisters-in-law S IH1 S T ER0 Z IH0 N L AO2
+#sister S IH1 S T ER0
+#sister's S IH1 S T ER0 Z
+#sister-in-law S IH1 S T ER0 IH0 N L AO2
+#sisterhood S IH1 S T ER0 HH UH0 D
+#sisters S IH1 S T ER0 Z
+#sisters-in-law S IH1 S T ER0 Z IH0 N L AO2
 sisti S IH1 S T IY0
 sistine S IH0 S T IY1 N
 sistine(2) S IH1 S T IY0 N
@@ -113266,10 +113266,10 @@ somnolence S AA1 M N AH0 L AH0 N S
 somnolent S AA1 M N AH0 L AH0 N T
 somogyi S OW0 M OW1 G Y IY0
 somoza S AH0 M OW1 Z AH0
-son S AH1 N
-son's S AH1 N Z
-son-in-law S AH1 N IH0 N L AO2
-son-of-a-bitch S AH1 N AH0 V AH0 B IH2 CH
+#son S AH1 N
+#son's S AH1 N Z
+#son-in-law S AH1 N IH0 N L AO2
+#son-of-a-bitch S AH1 N AH0 V AH0 B IH2 CH
 sonar S OW1 N AA0 R
 sonat S AA1 N AH0 T
 sonata S AH0 N AA1 T AH0
@@ -122056,9 +122056,9 @@ toft T AA1 F T
 tofte T OW1 F T
 tofu T OW1 F UW0
 toga T OW1 G AH0
-together T AH0 G EH1 DH ER0
-togetherness T AH0 G EH1 DH ER0 N AH0 S
-togethers T AH0 G EH1 DH ER0 Z
+#together T AH0 G EH1 DH ER0
+#togetherness T AH0 G EH1 DH ER0 N AH0 S
+#togethers T AH0 G EH1 DH ER0 Z
 toggle T AA1 G AH0 L
 toggled T AA1 G AH0 L D
 toggling T AA1 G L IH0 NG
@@ -125062,7 +125062,7 @@ uncoiled AH2 N K OY1 L D
 uncollectable AH0 N K AH0 L EH1 K T AH0 B AH0 L
 uncollected AH0 N K AH0 L EH1 K T IH0 D
 uncollectible AH0 N K AH0 L EH1 K T IH0 B AH0 L
-uncomfortable AH0 N K AH1 M F ER0 T AH0 B AH0 L
+#uncomfortable AH0 N K AH1 M F ER0 T AH0 B AH0 L
 uncomfortably AH0 N K AH1 M F ER0 T AH0 B L IY0
 uncommitted AH2 N K AH0 M IH1 T IH0 D
 uncommon AH0 N K AA1 M AH0 N
@@ -130004,12 +130004,12 @@ wedgwood W EH1 JH W UH2 D
 wedig W EH1 D IH0 G
 wedin W EH1 D IH0 N
 wedlock W EH1 D L AA2 K
-wednesday W EH1 N Z D IY0
-wednesday(2) W EH1 N Z D EY2
-wednesday's W EH1 N Z D IY0 Z
-wednesday's(2) W EH1 N Z D EY2 Z
-wednesdays W EH1 N Z D EY2 Z
-wednesdays(2) W EH1 N Z D IY0 Z
+#wednesday W EH1 N Z D IY0
+#wednesday(2) W EH1 N Z D EY2
+#wednesday's W EH1 N Z D IY0 Z
+#wednesday's(2) W EH1 N Z D EY2 Z
+#wednesdays W EH1 N Z D EY2 Z
+#wednesdays(2) W EH1 N Z D IY0 Z
 wedowee W EH0 D AW1 W IY2
 wedowee's W EH0 D AW1 W IY2 Z
 wedtech W EH1 D T EH2 K
@@ -132817,8 +132817,8 @@ wops W AA1 P S
 wor W AO1 R
 wor(2) D AH1 B EH0 L Y UW1 OW1 AA1 R
 wor(3) D AH1 B AH0 Y UW1 OW1 AA1 R
-worcester W UH1 S T ER0
-worcestershire W UH1 S T AH0 SH ER0
+#worcester W UH1 S T ER0
+#worcestershire W UH1 S T AH0 SH ER0
 word W ER1 D
 word's W ER1 D Z
 worded W ER1 D IH0 D
