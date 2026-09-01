@@ -162,7 +162,7 @@ def create_jsonl_dataset(input_file_path: str, output_file_path: str,
                 continue
             
             components: List[str] = line.strip().split()
-            english_word: str = components[0]
+            english_word: str = components[0].split("(")[0]
             
             original_phonemes_list: List[str] = components[1:]
             cmu_with_stress: str = " ".join(original_phonemes_list)
