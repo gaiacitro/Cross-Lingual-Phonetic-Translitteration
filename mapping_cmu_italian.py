@@ -24,14 +24,14 @@ ARPABET_TO_ITALIAN_MAPPING: Dict[str, str] = {
     "D": "d",    # e.g., 'dee' -> d
     "DH": "d",   # e.g., 'thee' -> d (Italian lacks dental fricatives, mapped to 'd')
     "F": "f",    # e.g., 'fee' -> f
-    "G": "g",    # e.g., 'green' -> g (hard 'g' sound)
+    "G": "gh",    # e.g., 'green' -> g (hard 'g' sound)
     "HH": "h",   # e.g., 'he' -> h (often silent in Italian, but kept for model pattern learning)
     "JH": "gi",  # e.g., 'gee' -> gi (soft 'g' sound in Italian)
-    "K": "k",    # e.g., 'key' -> k (unambiguous hard sound compared to Italian 'c'/'ch')
+    "K": "ch",    # e.g., 'key' -> k (unambiguous hard sound compared to Italian 'c'/'ch')
     "L": "l",    # e.g., 'lee' -> l
     "M": "m",    # e.g., 'me' -> m
     "N": "n",    # e.g., 'knee' -> n
-    "NG": "ng",  # e.g., 'ping' -> ng
+    "NG": "ngh",  # e.g., 'ping' -> ng
     "P": "p",    # e.g., 'pee' -> p
     "R": "r",    # e.g., 'read' -> r
     "S": "s",    # e.g., 'sea' -> s
@@ -42,5 +42,5 @@ ARPABET_TO_ITALIAN_MAPPING: Dict[str, str] = {
     "W": "u",    # e.g., 'we' -> u (semivowel mapped to 'u')
     "Y": "i",    # e.g., 'yield' -> i (semivowel mapped to 'i')
     "Z": "z",    # e.g., 'zee' -> z
-    "ZH": "j"    # e.g., 'seizure' -> j (approximate mapping for voiced postalveolar fricative)
+    "ZH": "sci"    # e.g., 'seizure' -> j (approximate mapping for voiced postalveolar fricative)
 }
