@@ -1,4 +1,4 @@
-#fatto
+/*fatto*/
 {"english_word": "summer", "italian_transliteration": "samer"}
 {"english_word": "winter", "italian_transliteration": "uinter"}
 {"english_word": "simple", "italian_transliteration": "simpl"}
@@ -144,19 +144,20 @@
 {"english_word": "pyramid", "italian_transliteration": "piramid"}
 {"english_word": "labyrinth", "italian_transliteration": "lebirint"}
 {"english_word": "Worcestershire", "italian_transliteration": "uosterscer"}
-
-
-#non fatto 
 {"english_word": "fast", "italian_transliteration": "fest"}
+{"english_word": "hat", "italian_transliteration": "het"}
+{"english_word": "hotel", "italian_transliteration": "hotel"}
+{"english_word": "king", "italian_transliteration": "chingh"}
+{"english_word": "party", "italian_transliteration": "parti"}
+
+
+/*non fatto*/
 {"english_word": "fire", "italian_transliteration": "faier"}
 {"english_word": "food", "italian_transliteration": "fud"}
 {"english_word": "gold", "italian_transliteration": "ghold"}
 {"english_word": "hand", "italian_transliteration": "hend"}
-{"english_word": "hat", "italian_transliteration": "het"}
 {"english_word": "help", "italian_transliteration": "help"}
 {"english_word": "hill", "italian_transliteration": "hil"}
-{"english_word": "hotel", "italian_transliteration": "hotel"}
-{"english_word": "king", "italian_transliteration": "chingh"}
 {"english_word": "lake", "italian_transliteration": "leich"}
 {"english_word": "land", "italian_transliteration": "lend"}
 {"english_word": "light", "italian_transliteration": "lait"}
@@ -165,7 +166,6 @@
 {"english_word": "money", "italian_transliteration": "mani"}
 {"english_word": "night", "italian_transliteration": "nait"}
 {"english_word": "park", "italian_transliteration": "parch"}
-{"english_word": "party", "italian_transliteration": "parti"}
 {"english_word": "phone", "italian_transliteration": "fon"}
 {"english_word": "plant", "italian_transliteration": "plent"}
 {"english_word": "river", "italian_transliteration": "river"}

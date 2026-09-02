@@ -41261,11 +41261,11 @@ fassett F AE1 S IH0 T
 fassler F AE1 S L ER0
 fassnacht F AE1 S N AH0 K T
 fassulo F AH0 S UW1 L OW0
-fast F AE1 S T
-fast-forward F AE2 S T F AO1 R W ER0 D
-fast-paced F AE2 S T P EY1 S T
-fastball F AE1 S T B AO2 L
-fastballs F AE1 S T B AO2 L Z
+#fast F AE1 S T
+#fast-forward F AE2 S T F AO1 R W ER0 D
+#fast-paced F AE2 S T P EY1 S T
+#fastball F AE1 S T B AO2 L
+#fastballs F AE1 S T B AO2 L Z
 fasted F AE1 S T IH0 D
 fasten F AE1 S AH0 N
 fastened F AE1 S AH0 N D
@@ -53236,8 +53236,8 @@ haston HH AE1 S T AH0 N
 hasty HH EY1 S T IY0
 haswell HH AE1 S W EH0 L
 hasz HH AA1 SH
-hat HH AE1 T
-hat's HH AE1 T S
+#hat HH AE1 T
+#hat's HH AE1 T S
 hata HH AA1 T AH0
 hatala HH AE1 T AH0 L AH0
 hataway HH AE1 T AH0 W EY2
@@ -56849,12 +56849,12 @@ hotchkiss HH AA1 CH K IH0 S
 hotdog HH AA1 T D AO2 G
 hotdogs HH AA1 T D AO2 G Z
 hote HH OW1 T
-hotel HH OW0 T EH1 L
-hotel's HH OW0 T EH1 L Z
-hotelier HH OW0 T EH1 L Y ER0
-hoteliers HH OW0 T EH1 L Y ER0 Z
-hotels HH OW0 T EH1 L Z
-hotels' HH OW0 T EH1 L Z
+#hotel HH OW0 T EH1 L
+#hotel's HH OW0 T EH1 L Z
+#hotelier HH OW0 T EH1 L Y ER0
+#hoteliers HH OW0 T EH1 L Y ER0 Z
+#hotels HH OW0 T EH1 L Z
+#hotels' HH OW0 T EH1 L Z
 hoten HH OW1 T AH0 N
 hoth HH AA1 TH
 hothouse HH AA1 T HH AW2 S
@@ -65079,8 +65079,8 @@ kineta K IH1 N IH0 T AH0
 kinetic K AH0 N EH1 T IH0 K
 kinetic(2) K IH0 N EH1 T IH0 K
 kinetics K AH0 N EH1 T IH0 K S
-king K IH1 NG
-king's K IH1 NG Z
+#king K IH1 NG
+#king's K IH1 NG Z
 kingbird K IH1 NG B ER2 D
 kingbirds K IH1 NG B ER2 D Z
 kingdom K IH1 NG D AH0 M
@@ -89871,9 +89871,9 @@ parts P AA1 R T S
 parts' P AA1 R T S
 parttime P AA1 R T T AY2 M
 partum P AA1 R T AH0 M
-party P AA1 R T IY0
-party's P AA1 R T IY0 Z
-partying P AA1 R T IY0 IH0 NG
+#party P AA1 R T IY0
+#party's P AA1 R T IY0 Z
+#partying P AA1 R T IY0 IH0 NG
 partyka P ER0 T IH1 K AH0
 parvin P AA1 R V IH0 N
 pary P AA1 R IY0
