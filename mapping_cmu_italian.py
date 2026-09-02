@@ -26,7 +26,7 @@ ARPABET_TO_ITALIAN_MAPPING: Dict[str, str] = {
     "F": "f",    # e.g., 'fee' -> f
     "G": "gh",    # e.g., 'green' -> g (hard 'g' sound)
     "HH": "h",   # e.g., 'he' -> h (often silent in Italian, but kept for model pattern learning)
-    "JH": "gi",  # e.g., 'gee' -> gi (soft 'g' sound in Italian)
+    "JH": "g",  # e.g., 'gee' -> gi (soft 'g' sound in Italian)
     "K": "ch",    # e.g., 'key' -> k (unambiguous hard sound compared to Italian 'c'/'ch')
     "L": "l",    # e.g., 'lee' -> l
     "M": "m",    # e.g., 'me' -> m
