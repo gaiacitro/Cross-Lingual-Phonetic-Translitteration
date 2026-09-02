@@ -23498,14 +23498,14 @@ comex K AA1 M EH2 K S
 comex's K AA1 M EH2 K S IH0 Z
 comfed K AA1 M F EH2 D
 comfinance K AA1 M F IH0 N AH0 N S
-comfort K AH1 M F ER0 T
+#comfort K AH1 M F ER0 T
 #comfortable K AH1 M F ER0 T AH0 B AH0 L
-comfortably K AH1 M F ER0 T AH0 B L IY0
-comforted K AH1 M F ER0 T IH0 D
-comforter K AH1 M F ER0 T ER0
-comforters K AH1 M F ER0 T ER0 Z
-comforting K AH1 M F ER0 T IH0 NG
-comforts K AH1 M F ER0 T S
+#comfortably K AH1 M F ER0 T AH0 B L IY0
+#comforted K AH1 M F ER0 T IH0 D
+#comforter K AH1 M F ER0 T ER0
+#comforters K AH1 M F ER0 T ER0 Z
+#comforting K AH1 M F ER0 T IH0 NG
+#comforts K AH1 M F ER0 T S
 comfrey K AH1 M F R IY0
 comfy K AH1 M F IY0
 comic K AA1 M IH0 K
