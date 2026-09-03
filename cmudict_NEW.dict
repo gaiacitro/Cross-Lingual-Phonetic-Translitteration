@@ -15951,13 +15951,13 @@ bub B AH1 B
 bubar B UW1 B ER0
 bubb B AH1 B
 bubba B AH1 B AH0
-bubble B AH1 B AH0 L
-bubbled B AH1 B AH0 L D
-bubbles B AH1 B AH0 L Z
-bubbling B AH1 B AH0 L IH0 NG
-bubbling(2) B AH1 B L IH0 NG
-bubbly B AH1 B L IY0
-bubbly(2) B AH1 B AH0 L IY0
+#bubble B AH1 B AH0 L
+#bubbled B AH1 B AH0 L D
+#bubbles B AH1 B AH0 L Z
+#bubbling B AH1 B AH0 L IH0 NG
+#bubbling(2) B AH1 B L IH0 NG
+#bubbly B AH1 B L IY0
+#bubbly(2) B AH1 B AH0 L IY0
 bubeck B UW1 B EH0 K
 bubel B UW1 B AH0 L
 buber B UW1 B ER2
@@ -17800,10 +17800,10 @@ camdessus K AE0 M D EH1 S AH0 S
 came K EY1 M
 cameco K AE1 M IH0 K OW0
 camejo K AA0 M EY1 Y OW0
-camel K AE1 M AH0 L
-camel's K AE1 M AH0 L Z
-camelot K AE1 M AH0 L AA2 T
-camels K AE1 M AH0 L Z
+#camel K AE1 M AH0 L
+#camel's K AE1 M AH0 L Z
+#camelot K AE1 M AH0 L AA2 T
+#camels K AE1 M AH0 L Z
 cameo K AE1 M IY0 OW2
 cameos K AE1 M IY0 OW2 Z
 #camera K AE1 M ER0 AH0
@@ -23487,12 +23487,12 @@ comerford K AH0 M ER1 F ER0 D
 comerica K AH0 M EH1 R IH0 K AH0
 comers K AH1 M ER0 Z
 comes K AH1 M Z
-comet K AA1 M AH0 T
-comet's K AA1 M AH0 T S
-cometary K AA1 M AH0 T EH2 R IY0
-cometh K AH1 M IH0 TH
-cometra K OW0 M EH1 T R AH0
-comets K AA1 M AH0 T S
+#comet K AA1 M AH0 T
+#comet's K AA1 M AH0 T S
+#cometary K AA1 M AH0 T EH2 R IY0
+#cometh K AH1 M IH0 TH
+#cometra K OW0 M EH1 T R AH0
+#comets K AA1 M AH0 T S
 comeuppance K AH2 M AH1 P AH0 N S
 comex K AA1 M EH2 K S
 comex's K AA1 M EH2 K S IH0 Z
@@ -31085,16 +31085,16 @@ desensitized D IH0 S EH1 N S AH0 T AY2 Z D
 desensitizing D IH0 S EH1 N S AH0 T AY2 Z IH0 NG
 deseret D EH2 S ER0 EH1 T
 deseret(2) D EH2 Z ER0 EY1
-desert D EH1 Z ER0 T
-desert(2) D IH0 Z ER1 T
-deserted D IH0 Z ER1 T IH0 D
-deserter D EH1 Z ER0 T ER0
-deserters D EH1 Z ER0 T ER0 Z
-deserting D EH1 Z ER0 T IH0 NG
-desertion D IH0 Z ER1 SH AH0 N
-desertions D IH0 Z ER1 SH AH0 N Z
-deserts D EH1 Z ER0 T S
-deserts(2) D IH0 Z ER1 T S
+#desert D EH1 Z ER0 T
+#desert(2) D IH0 Z ER1 T
+#deserted D IH0 Z ER1 T IH0 D
+#deserter D EH1 Z ER0 T ER0
+#deserters D EH1 Z ER0 T ER0 Z
+#deserting D EH1 Z ER0 T IH0 NG
+#desertion D IH0 Z ER1 SH AH0 N
+#desertions D IH0 Z ER1 SH AH0 N Z
+#deserts D EH1 Z ER0 T S
+#deserts(2) D IH0 Z ER1 T S
 deserve D IH0 Z ER1 V
 deserved D IH0 Z ER1 V D
 deservedly D IH0 Z ER1 V AH0 D L IY0
@@ -46069,8 +46069,8 @@ galati G AA0 L AA1 T IY0
 galaviz G AE1 L AH0 V IH0 Z
 galax G AE1 L AE2 K S
 galaxies G AE1 L AH0 K S IY0 Z
-galaxy G AE1 L AH0 K S IY0
-galaxy's G AE1 L AH0 K S IY0 Z
+#galaxy G AE1 L AH0 K S IY0
+#galaxy's G AE1 L AH0 K S IY0 Z
 galban G AE1 L B AH0 N
 galbo G AE1 L B OW0
 galbraith G AE1 L B R EY2 TH
@@ -46521,16 +46521,16 @@ garity G AE1 R IH0 T IY0
 garl G AA1 R L
 garlan G AA1 R L AH0 N
 garland G AA1 R L AH0 N D
-garlic G AA1 R L IH0 K
-garlick G AA1 R L IH0 K
-garlicky G AA1 R L IH0 K IY0
-garling G AA1 R L IH0 NG
-garlinger G AA1 R L IH0 NG ER0
-garlinghouse G AA1 R L IH0 NG HH AW2 S
-garlington G AA1 R L IH0 NG T AH0 N
-garlitz G AA1 R L IH0 T S
-garlock G AA1 R L AH0 K
-garlow G AA1 R L OW0
+#garlic G AA1 R L IH0 K
+#garlick G AA1 R L IH0 K
+#garlicky G AA1 R L IH0 K IY0
+#garling G AA1 R L IH0 NG
+#garlinger G AA1 R L IH0 NG ER0
+#garlinghouse G AA1 R L IH0 NG HH AW2 S
+#garlington G AA1 R L IH0 NG T AH0 N
+#garlitz G AA1 R L IH0 T S
+#garlock G AA1 R L AH0 K
+#garlow G AA1 R L OW0
 garman G AA1 R M AH0 N
 garmany G ER0 M AO1 N IY0
 garment G AA1 R M AH0 N T
@@ -63070,8 +63070,8 @@ junger JH AH1 NG ER0
 jungers JH AH1 NG ER0 Z
 junghans JH AH1 NG G AH0 N Z
 jungin JH AH1 N G IH0 N
-jungle JH AH1 NG G AH0 L
-jungles JH AH1 NG G AH0 L Z
+#jungle JH AH1 NG G AH0 L
+#jungles JH AH1 NG G AH0 L Z
 jungman JH AH1 NG M AH0 N
 jungwirth JH AH1 NG G W ER0 TH
 junia Y UW1 N IY0 AH0
@@ -69712,13 +69712,13 @@ lemmon L EH1 M AH0 N
 lemmond L EH1 M AH0 N D
 lemmons L EH1 M AH0 N Z
 lemoine L IH0 M OY1 N
-lemon L EH1 M AH0 N
-lemonade L EH1 M AH0 N EY1 D
-lemond L EH1 M AH0 N D
-lemonds L EH1 M AH0 N D Z
-lemons L EH1 M AH0 N Z
-lemont L AH0 M AA1 N T
-lemos L IY1 M OW0 Z
+#lemon L EH1 M AH0 N
+#lemonade L EH1 M AH0 N EY1 D
+#lemond L EH1 M AH0 N D
+#lemonds L EH1 M AH0 N D Z
+#lemons L EH1 M AH0 N Z
+#lemont L AH0 M AA1 N T
+#lemos L IY1 M OW0 Z
 lemp L EH1 M P
 lempert L EH1 M P ER0 T
 lempke L EH1 M P K
@@ -73417,13 +73417,13 @@ maggot M AE1 G AH0 T
 maggots M AE1 G AH0 T S
 maggs M AE1 G Z
 magi M EY1 JH AY0
-magic M AE1 JH IH0 K
-magic's M AE1 JH IH0 K S
-magical M AE1 JH IH0 K AH0 L
-magically M AE1 JH IH0 K AH0 L IY0
-magically(2) M AE1 JH IH0 K L IY0
-magician M AH0 JH IH1 SH AH0 N
-magicians M AH0 JH IH1 SH AH0 N Z
+#magic M AE1 JH IH0 K
+#magic's M AE1 JH IH0 K S
+#magical M AE1 JH IH0 K AH0 L
+#magically M AE1 JH IH0 K AH0 L IY0
+#magically(2) M AE1 JH IH0 K L IY0
+#magician M AH0 JH IH1 SH AH0 N
+#magicians M AH0 JH IH1 SH AH0 N Z
 magid M AE1 JH IH0 D
 magie M EY1 JH IY0
 magiera M AA0 JH IH1 R AH0
@@ -77683,10 +77683,10 @@ melodrama M EH1 L AH0 D R AA2 M AH0
 melodramas M EH1 L AH0 D R AA2 M AH0 Z
 melodramatic M EH2 L AH0 D R AH0 M AE1 T IH0 K
 melody M EH1 L AH0 D IY0
-melon M EH1 L AH0 N
-melone M EH0 L OW1 N IY0
-meloni M EH0 L OW1 N IY0
-melons M EH1 L AH0 N Z
+#melon M EH1 L AH0 N
+#melone M EH0 L OW1 N IY0
+#meloni M EH0 L OW1 N IY0
+#melons M EH1 L AH0 N Z
 melor M EH2 L AO1 R
 melor(2) M AH0 L AO1 R
 meloy M EH1 L OY0
@@ -79562,11 +79562,11 @@ mironenko M IH2 R OW0 N EH1 NG K OW0
 miroslav M IH1 R AH0 S L AA0 V
 mirra M IH1 R AH0
 mirren M IH1 R AH0 N
-mirror M IH1 R ER0
-mirror's M IH1 R ER0 Z
-mirrored M IH1 R ER0 D
-mirroring M IH1 R ER0 IH0 NG
-mirrors M IH1 R ER0 Z
+#mirror M IH1 R ER0
+#mirror's M IH1 R ER0 Z
+#mirrored M IH1 R ER0 D
+#mirroring M IH1 R ER0 IH0 NG
+#mirrors M IH1 R ER0 Z
 mirsad M IH1 R S AE2 D
 mirsky M ER1 S K IY0
 mirth M ER1 TH
@@ -85919,7 +85919,7 @@ oars AO1 R Z
 oarsman AO1 R Z M AH0 N
 oas OW1 EY1 EH1 S
 oases OW0 EY1 S IY0 Z
-oasis OW0 EY1 S IH0 S
+#oasis OW0 EY1 S IH0 S
 oat OW1 T
 oates OW1 T S
 oath OW1 TH
@@ -86996,9 +86996,9 @@ ong AO1 NG
 ongoing AA1 N G OW2 IH0 NG
 ongoing(2) AO1 N G OW2 IH0 NG
 ongpin AO1 NG P IH0 N
-onion AH1 N Y AH0 N
-onions AH1 N Y AH0 N Z
-onishi OW0 N IY1 SH IY0
+#onion AH1 N Y AH0 N
+#onions AH1 N Y AH0 N Z
+#onishi OW0 N IY1 SH IY0
 onken AA1 NG K AH0 N
 onley AA1 N L IY0
 online AO1 N L AY2 N
@@ -92545,9 +92545,9 @@ pilling P IH1 L IH0 NG
 pillion P IH1 L Y AH0 N
 pilloried P IH1 L ER0 IY0 D
 pillory P IH1 L ER0 IY0
-pillow P IH1 L OW0
-pillows P IH1 L OW0 Z
-pillowtex P IH1 L OW0 T EH2 K S
+#pillow P IH1 L OW0
+#pillows P IH1 L OW0 Z
+#pillowtex P IH1 L OW0 T EH2 K S
 pills P IH1 L Z
 pillsbury P IH1 L Z B EH2 R IY0
 pillsbury's P IH1 L Z B EH2 R IY0 Z
@@ -97019,14 +97019,14 @@ puusepp P UW1 Z AH0 P
 puza P UW1 Z AH0
 puzio P UW1 Z IY0 OW0
 puzo P UW1 Z OW0
-puzzle P AH1 Z AH0 L
-puzzled P AH1 Z AH0 L D
-puzzlemaster P AH1 Z AH0 L M AE2 S T ER0
-puzzlement P AH1 Z AH0 L M AH0 N T
-puzzler P AH1 Z L ER0
-puzzles P AH1 Z AH0 L Z
-puzzling P AH1 Z AH0 L IH0 NG
-puzzling(2) P AH1 Z L IH0 NG
+#puzzle P AH1 Z AH0 L
+#puzzled P AH1 Z AH0 L D
+#puzzlemaster P AH1 Z AH0 L M AE2 S T ER0
+#puzzlement P AH1 Z AH0 L M AH0 N T
+#puzzler P AH1 Z L ER0
+#puzzles P AH1 Z AH0 L Z
+#puzzling P AH1 Z AH0 L IH0 NG
+#puzzling(2) P AH1 Z L IH0 NG
 puzzo P UW1 Z OW0
 pyatt P AY1 AH0 T
 pyburn P IH1 B ER0 N
@@ -102359,10 +102359,10 @@ ridder R IH1 D ER0
 ridder's R IH1 D ER0 Z
 riddick R IH1 D IH0 K
 ridding R IH1 D IH0 NG
-riddle R IH1 D AH0 L
-riddled R IH1 D AH0 L D
-riddler R IH1 D L ER0
-riddles R IH1 D AH0 L Z
+#riddle R IH1 D AH0 L
+#riddled R IH1 D AH0 L D
+#riddler R IH1 D L ER0
+#riddles R IH1 D AH0 L Z
 riddock R IH1 D AH0 K
 ride R AY1 D
 rideau R IH0 D OW1
@@ -103083,14 +103083,14 @@ robling(2) R OW1 B L IH0 NG
 robnett R AA1 B N IH0 T
 robo R OW1 B OW0
 robocop R OW1 B OW0 K AA2 P
-robot R OW1 B AA2 T
-robot(2) R OW1 B AH2 T
-robot's R OW1 B AA2 T S
-robot's(2) R OW1 B AH2 T S
-robotic R OW2 B AA1 T IH0 K
-robotics R OW2 B AA1 T IH0 K S
-robots R OW1 B AA2 T S
-robots(2) R OW1 B AH2 T S
+#robot R OW1 B AA2 T
+#robot(2) R OW1 B AH2 T
+#robot's R OW1 B AA2 T S
+#robot's(2) R OW1 B AH2 T S
+#robotic R OW2 B AA1 T IH0 K
+#robotics R OW2 B AA1 T IH0 K S
+#robots R OW1 B AA2 T S
+#robots(2) R OW1 B AH2 T S
 robs R AA1 B Z
 robson R AA1 B S AH0 N
 robuck R OW1 B AH0 K
@@ -121619,10 +121619,10 @@ tifton T IH1 F T AH0 N
 tig T IH1 G
 tigar T AY1 G AA2 R
 tigar's T AY1 G AA2 R Z
-tiger T AY1 G ER0
-tiger's T AY1 G ER0 Z
+#tiger T AY1 G ER0
+#tiger's T AY1 G ER0 Z
 tigera T IH0 JH EH1 R AH0
-tigers T AY1 G ER0 Z
+#tigers T AY1 G ER0 Z
 tigers' T AY1 G ER0 Z
 tigert T AY1 G ER0 T
 tigges T IH1 G Z
@@ -127417,8 +127417,8 @@ veltman V EH1 L T M AH0 N
 veltre V EH1 L T ER0
 veltri V EH1 L T R IY0
 velveeta V EH0 L V IY1 T AH0
-velvet V EH1 L V AH0 T
-velveteen V EH1 L V AH0 T IY2 N
+#velvet V EH1 L V AH0 T
+#velveteen V EH1 L V AH0 T IY2 N
 velvety V EH1 L V AH0 T IY0
 vemich V EH1 M IH0 CH
 vempala V EH2 M P AA1 L AH0
@@ -128323,10 +128323,10 @@ virtuous V ER1 CH UW0 AH0 S
 virulence V IH1 R AH0 L AH0 N S
 virulent V IH1 R AH0 L AH0 N T
 virulently V IH1 R AH0 L AH0 N T L IY0
-virus V AY1 R AH0 S
-virus's V AY1 R AH0 S IH0 Z
-viruses V AY1 R AH0 S AH0 Z
-viruses(2) V AY1 R AH0 S IH0 Z
+#virus V AY1 R AH0 S
+#virus's V AY1 R AH0 S IH0 Z
+#viruses V AY1 R AH0 S AH0 Z
+#viruses(2) V AY1 R AH0 S IH0 Z
 virzi V IH1 R Z IY0
 vis V IH1 S
 vis-a-vis V IY1 Z AH0 V IY0
@@ -134365,9 +134365,9 @@ zealously Z IY1 L AH0 S L IY0
 zealously(2) Z EH1 L AH0 S L IY0
 zebell Z IY1 B EH0 L
 zebley Z EH1 B L IY0
-zebra Z IY1 B R AH0
-zebras Z IY1 B R AH0 Z
-zebrowski Z AH0 B R AO1 F S K IY0
+#zebra Z IY1 B R AH0
+#zebras Z IY1 B R AH0 Z
+#zebrowski Z AH0 B R AO1 F S K IY0
 zebulon Z IY1 B AH0 L AH0 N
 zecca Z EH1 K AH0
 zech Z EH1 K

@@ -171,49 +171,12 @@
 {"english_word": "falcon", "italian_transliteration": "falcon"}
 {"english_word": "parrot", "italian_transliteration": "perot"}
 {"english_word": "pirate", "italian_transliteration": "pairet"}
-
-
-
-/*non fatto*/
-/*{"english_word": "fire", "italian_transliteration": "faier"}
-{"english_word": "food", "italian_transliteration": "fud"}
-{"english_word": "gold", "italian_transliteration": "ghold"}
-{"english_word": "hand", "italian_transliteration": "hend"}
-{"english_word": "help", "italian_transliteration": "help"}
-{"english_word": "hill", "italian_transliteration": "hil"}
-{"english_word": "lake", "italian_transliteration": "leich"}
-{"english_word": "land", "italian_transliteration": "lend"}
-{"english_word": "light", "italian_transliteration": "lait"}
-{"english_word": "milk", "italian_transliteration": "milch"}
-{"english_word": "mind", "italian_transliteration": "maind"}
-{"english_word": "money", "italian_transliteration": "mani"}
-{"english_word": "night", "italian_transliteration": "nait"}
-{"english_word": "park", "italian_transliteration": "parch"}
-{"english_word": "phone", "italian_transliteration": "fon"}
-{"english_word": "plant", "italian_transliteration": "plent"}
-{"english_word": "river", "italian_transliteration": "river"}
-{"english_word": "road", "italian_transliteration": "rod"}
-{"english_word": "rock", "italian_transliteration": "roch"}
-{"english_word": "room", "italian_transliteration": "rum"}
-{"english_word": "sand", "italian_transliteration": "send"}
-{"english_word": "school", "italian_transliteration": "schul"}
-{"english_word": "star", "italian_transliteration": "star"}
-{"english_word": "stone", "italian_transliteration": "ston"}
-{"english_word": "story", "italian_transliteration": "stori"}
-{"english_word": "town", "italian_transliteration": "taun"}
-{"english_word": "wind", "italian_transliteration": "uind"}
-{"english_word": "world", "italian_transliteration": "uorld"}
-
-*/
-
-
 {"english_word": "lemon", "italian_transliteration": "lemon"}
 {"english_word": "melon", "italian_transliteration": "melon"}
 {"english_word": "onion", "italian_transliteration": "anion"}
 {"english_word": "garlic", "italian_transliteration": "garlic"}
 {"english_word": "pillow", "italian_transliteration": "pilo"}
 {"english_word": "mirror", "italian_transliteration": "miror"}
-{"english_word": "blanket", "italian_transliteration": "blenchet"}
 {"english_word": "velvet", "italian_transliteration": "velvet"}
 {"english_word": "tiger", "italian_transliteration": "taigher"}
 {"english_word": "zebra", "italian_transliteration": "zibra"}
@@ -224,10 +187,11 @@
 {"english_word": "oasis", "italian_transliteration": "oeisis"}
 {"english_word": "galaxy", "italian_transliteration": "ghelecsi"}
 {"english_word": "comet", "italian_transliteration": "comet"}
-{"english_word": "ocean", "italian_transliteration": "oscen"}
 {"english_word": "jungle", "italian_transliteration": "giangol"}
 {"english_word": "desert", "italian_transliteration": "desert"}
 {"english_word": "puzzle", "italian_transliteration": "pazol"}
 {"english_word": "riddle", "italian_transliteration": "ridol"}
 {"english_word": "bubble", "italian_transliteration": "babol"}
+
+
 
