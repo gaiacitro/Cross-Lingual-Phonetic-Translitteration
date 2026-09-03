@@ -5694,11 +5694,11 @@ armold AA1 R M OW2 L D
 armon AA1 R M AH0 N
 armond AA1 R M AH0 N D
 armonk AA1 R M AH0 NG K
-armor AA1 R M ER0
-armored AA1 R M ER0 D
-armories AA1 R M ER0 IY0 Z
-armory AA1 R M ER0 IY0
-armour AA1 R M ER0
+#armor AA1 R M ER0
+#armored AA1 R M ER0 D
+#armories AA1 R M ER0 IY0 Z
+#armory AA1 R M ER0 IY0
+#armour AA1 R M ER0
 armpit AA1 R M P IH2 T
 armpits AA1 R M P IH2 T S
 armrest AA1 R M R EH2 S T
@@ -16035,9 +16035,9 @@ bucked B AH1 K T
 buckel B AH1 K AH0 L
 buckelew B AH1 K IH0 L UW0
 buckels B AH1 K AH0 L Z
-bucket B AH1 K AH0 T
-bucket(2) B AH1 K IH0 T
-buckets B AH1 K AH0 T S
+#bucket B AH1 K AH0 T
+#bucket(2) B AH1 K IH0 T
+#buckets B AH1 K AH0 T S
 buckey B AH1 K IY0
 buckeye B AH1 K AY2
 buckeyes B AH1 K AY2 Z
@@ -18796,12 +18796,12 @@ carpentier K AA1 R P AH0 N T IY0 ER0
 carpentieri K AA0 R P EH0 N T IH1 R IY0
 carpentry K AA1 R P AH0 N T R IY0
 carper K AA1 R P ER0
-carpet K AA1 R P AH0 T
-carpetbagger K AA1 R P AH0 T B AE2 G ER0
-carpetbaggers K AA1 R P AH0 T B AE2 G ER0 Z
-carpeted K AA1 R P AH0 T IH0 D
-carpeting K AA1 R P AH0 T IH0 NG
-carpets K AA1 R P AH0 T S
+#carpet K AA1 R P AH0 T
+#carpetbagger K AA1 R P AH0 T B AE2 G ER0
+#carpetbaggers K AA1 R P AH0 T B AE2 G ER0 Z
+#carpeted K AA1 R P AH0 T IH0 D
+#carpeting K AA1 R P AH0 T IH0 NG
+#carpets K AA1 R P AH0 T S
 carpinelli K AA0 R P IY0 N EH1 L IY0
 carping K AA1 R P IH0 NG
 carpino K AA0 R P IY1 N OW0
@@ -22477,9 +22477,9 @@ closer K L OW1 S ER0
 closer(2) K L OW1 Z ER0
 closes K L OW1 Z IH0 Z
 closest K L OW1 S AH0 S T
-closet K L AA1 Z AH0 T
-closeted K L AA1 Z AH0 T IH0 D
-closets K L AA1 Z AH0 T S
+#closet K L AA1 Z AH0 T
+#closeted K L AA1 Z AH0 T IH0 D
+#closets K L AA1 Z AH0 T S
 closeup K L OW1 S AH1 P
 closeups K L OW1 S AH1 P S
 closing K L OW1 Z IH0 NG
@@ -26205,11 +26205,11 @@ couse K AW1 S
 cousens K UW1 S AH0 N Z
 cousens(2) K AW1 S AH0 N Z
 couser K AW1 S ER0
-cousin K AH1 Z AH0 N
-cousin's K AH1 Z AH0 N Z
+#cousin K AH1 Z AH0 N
+#cousin's K AH1 Z AH0 N Z
 cousineau K UW1 S IH0 N OW2
 cousino K AW0 S IY1 N OW0
-cousins K AH1 Z AH0 N Z
+#cousins K AH1 Z AH0 N Z
 cousteau K UW2 S T OW1
 cousteau's K UW2 S T OW1 Z
 cousy K UW1 Z IY0
@@ -34580,13 +34580,13 @@ dragline D R AE1 G L AY2 N
 dragnet D R AE1 G N EH2 T
 dragnets D R AE1 G N EH2 T S
 drago D R AA1 G OW0
-dragon D R AE1 G AH0 N
-dragon's D R AE1 G AH0 N Z
-dragonair D R AE1 G AH0 N EH2 R
-dragone D R AH0 G OW1 N
-dragonhead D R AE1 G AH0 N HH EH2 D
-dragonheart D R AE1 G AH0 N HH AA2 R T
-dragons D R AE1 G AH0 N Z
+#dragon D R AE1 G AH0 N
+#dragon's D R AE1 G AH0 N Z
+#dragonair D R AE1 G AH0 N EH2 R
+#dragone D R AH0 G OW1 N
+#dragonhead D R AE1 G AH0 N HH EH2 D
+#dragonheart D R AE1 G AH0 N HH AA2 R T
+#dragons D R AE1 G AH0 N Z
 dragoo D R AA1 G UW0
 dragovich D R AE1 G AH0 V IH0 CH
 drags D R AE1 G Z
@@ -40875,17 +40875,17 @@ falcigno(2) F EH2 L S IY1 N Y OW0
 falck F AE1 L K
 falco F AE1 L K OW0
 falcoff F AE1 L K AO0 F
-falcon F AE1 L K AH0 N
-falconbridge F AE1 L K AH0 N B R IH2 JH
-falconbridge's F AE1 L K AH0 N B R IH2 JH IH0 Z
-falcone F AA0 L K OW1 N IY0
-falconer F AE1 L K AH0 N ER0
-falconers F AE1 L K AH0 N ER0 Z
-falconet F AE2 L K AH0 N EH1 T
-falconets F AE2 L K AH0 N EH1 T S
-falconi F AA0 L K OW1 N IY0
-falconry F AE1 L K AH0 N R IY0
-falcons F AE1 L K AH0 N Z
+#falcon F AE1 L K AH0 N
+#falconbridge F AE1 L K AH0 N B R IH2 JH
+#falconbridge's F AE1 L K AH0 N B R IH2 JH IH0 Z
+#falcone F AA0 L K OW1 N IY0
+#falconer F AE1 L K AH0 N ER0
+#falconers F AE1 L K AH0 N ER0 Z
+#falconet F AE2 L K AH0 N EH1 T
+#falconets F AE2 L K AH0 N EH1 T S
+#falconi F AA0 L K OW1 N IY0
+#falconry F AE1 L K AH0 N R IY0
+#falcons F AE1 L K AH0 N Z
 faldo F AA1 L D OW0
 faler F EY1 L ER0
 fales F EY1 L Z
@@ -54248,9 +54248,9 @@ helmer HH EH1 L M ER0
 helmerich HH EH1 L M ER0 IH0 K
 helmers HH EH1 L M ER0 Z
 helmes HH EH1 L M Z
-helmet HH EH1 L M AH0 T
-helmeted HH EH1 L M AH0 T IH0 D
-helmets HH EH1 L M AH0 T S
+#helmet HH EH1 L M AH0 T
+#helmeted HH EH1 L M AH0 T IH0 D
+#helmets HH EH1 L M AH0 T S
 helmich HH EH1 L M IH0 K
 helmick HH EH1 L M IH0 K
 helmig HH EH1 L M IH0 G
@@ -71298,10 +71298,10 @@ liz's L IH1 Z AH0 Z
 liza L IY1 Z AH0
 lizabeth L IH1 Z AH0 B EH0 TH
 lizak L IH1 Z AH0 K
-lizard L IH1 Z ER0 D
-lizard's L IH1 Z ER0 D Z
-lizards L IH1 Z ER0 D Z
-lizarraga L IY0 Z AA0 R AA1 G AH0
+#lizard L IH1 Z ER0 D
+#lizard's L IH1 Z ER0 D Z
+#lizards L IH1 Z ER0 D Z
+#lizarraga L IY0 Z AA0 R AA1 G AH0
 lizhi L IH1 Z IY0
 lizotte L IH0 Z AO1 T
 lizzie L IH1 Z IY0
@@ -73472,18 +73472,18 @@ magnesia M AE0 G N IY1 ZH AH0
 magnesite M AE1 G N AH0 S AY2 T
 magnesium M AE0 G N IY1 Z IY0 AH0 M
 magness M AH0 G N IY1 S
-magnet M AE1 G N AH0 T
-magnet's M AE1 G N AH0 T S
-magnetek M AE1 G N EH0 T EH2 K
-magneti M AE0 G N EH1 T IY0
-magnetic M AE0 G N EH1 T IH0 K
-magnetically M AE0 G N EH1 T IH0 K AH0 L IY0
-magnetically(2) M AE0 G N EH1 T IH0 K L IY0
-magnetics M AE0 G N EH1 T IH0 K S
-magnetism M AE1 G N AH0 T IH2 Z AH0 M
-magnetite M AE1 G N AH0 T AY2 T
-magnetization M AE2 G N AH0 T AH0 Z EY1 SH AH0 N
-magnetized M AE1 G N IH0 T AY2 Z D
+#magnet M AE1 G N AH0 T
+#magnet's M AE1 G N AH0 T S
+#magnetek M AE1 G N EH0 T EH2 K
+#magneti M AE0 G N EH1 T IY0
+#magnetic M AE0 G N EH1 T IH0 K
+#magnetically M AE0 G N EH1 T IH0 K AH0 L IY0
+#magnetically(2) M AE0 G N EH1 T IH0 K L IY0
+#magnetics M AE0 G N EH1 T IH0 K S
+#magnetism M AE1 G N AH0 T IH2 Z AH0 M
+#magnetite M AE1 G N AH0 T AY2 T
+#magnetization M AE2 G N AH0 T AH0 Z EY1 SH AH0 N
+#magnetized M AE1 G N IH0 T AY2 Z D
 magnetometer M AE2 G N AH0 T AA1 M AH0 T ER0
 magnetometers M AE2 G N AH0 T AA1 M AH0 T ER0 Z
 magnetron M AE1 G N AH0 T R AA2 N
@@ -89755,11 +89755,11 @@ parriott P AE1 R IY0 AH0 T
 parris P EH1 R IH0 S
 parrish P EH1 R IH0 SH
 parrishes P EH1 R IH0 SH IH0 Z
-parrot P EH1 R AH0 T
-parrots P EH1 R AH0 T S
-parrott P EH1 R AH0 T
-parrotta P AA0 R OW1 T AH0
-parrow P AE1 R OW0
+#parrot P EH1 R AH0 T
+#parrots P EH1 R AH0 T S
+#parrott P EH1 R AH0 T
+#parrotta P AA0 R OW1 T AH0
+#parrow P AE1 R OW0
 parry P EH1 R IY0
 pars P AA1 R Z
 parse P AA1 R S
@@ -92766,11 +92766,11 @@ piraeus P AH0 R EY1 AH0 S
 piraino P IH0 R EY1 N OW0
 pirandello P IH2 R AH0 N D EH1 L OW0
 piranha P IH0 R AE1 N HH AH0
-pirate P AY1 R AH0 T
-pirate's P AY1 R AH0 T S
-pirated P AY1 R AH0 T IH0 D
-pirates P AY1 R AH0 T S
-pirating P AY1 R AH0 T IH0 NG
+#pirate P AY1 R AH0 T
+#pirate's P AY1 R AH0 T S
+#pirated P AY1 R AH0 T IH0 D
+#pirates P AY1 R AH0 T S
+#pirating P AY1 R AH0 T IH0 NG
 pirelli P IH0 R EH1 L IY0
 pirelli's P IH0 R EH1 L IY0 Z
 pires P AY1 R Z
@@ -93096,10 +93096,10 @@ plasterer P L AE1 S T ER0 ER0
 plastering P L AE1 S T ER0 IH0 NG
 plasters P L AE1 S T ER0 Z
 plasterwork P L AE1 S T ER0 W ER2 K
-plastic P L AE1 S T IH0 K
+#plastic P L AE1 S T IH0 K
 plasticine P L AE1 S T IH0 S IY2 N
 plasticizer P L AE1 S T AH0 S AY2 Z ER0
-plastics P L AE1 S T IH0 K S
+#plastics P L AE1 S T IH0 K S
 plata P L AA1 T AH0
 plate P L EY1 T
 plateau P L AE0 T OW1
@@ -105264,8 +105264,8 @@ salaam S AH0 L AA1 M
 salable S EY1 L AH0 B AH0 L
 salables S EY1 L AH0 B AH0 L Z
 salacious S AH0 L EY1 SH AH0 S
-salad S AE1 L AH0 D
-salada S AH0 L AA1 D AH0
+#salad S AE1 L AH0 D
+#salada S AH0 L AA1 D AH0
 saladin S AE1 L AH0 D IH0 N
 saladino S AA0 L AA0 D IY1 N OW0
 salads S AE1 L AH0 D Z
@@ -109533,9 +109533,9 @@ shamir's SH AH0 M IH1 R Z
 shammond SH AE1 M AH0 N D
 shamp SH AE1 M P
 shampine SH AE1 M P AY2 N
-shampoo SH AE0 M P UW1
-shampooed SH AE0 M P UW1 D
-shampoos SH AE0 M P UW1 Z
+#shampoo SH AE0 M P UW1
+#shampooed SH AE0 M P UW1 D
+#shampoos SH AE0 M P UW1 Z
 shamrock SH AE1 M R AA2 K
 shamrock's SH AE1 M R AA2 K S
 shamu SH AA0 M UW1
@@ -110072,12 +110072,12 @@ shied SH AY1 D
 shieh SH IY1
 shiel SH IY1 L
 shiela SH AY1 L AH0
-shield SH IY1 L D
-shield's SH IY1 L D Z
-shielded SH IY1 L D IH0 D
-shielding SH IY1 L D IH0 NG
-shields SH IY1 L D Z
-shiels SH IY1 L Z
+#shield SH IY1 L D
+#shield's SH IY1 L D Z
+#shielded SH IY1 L D IH0 D
+#shielding SH IY1 L D IH0 NG
+#shields SH IY1 L D Z
+#shiels SH IY1 L Z
 shier SH AY1 ER0
 shies SH AY1 Z
 shiff SH IH1 F
@@ -112819,10 +112819,10 @@ soaked S OW1 K T
 soaker S OW1 K ER0
 soaking S OW1 K IH0 NG
 soaks S OW1 K S
-soap S OW1 P
-soapbox S OW1 P B AA2 K S
-soaps S OW1 P S
-soapy S OW1 P IY0
+#soap S OW1 P
+#soapbox S OW1 P B AA2 K S
+#soaps S OW1 P S
+#soapy S OW1 P IY0
 soar S AO1 R
 soard S AO1 R D
 soared S AO1 R D
@@ -114108,12 +114108,12 @@ spickard S P IH1 K ER0 D
 spickler S P IH1 K L ER0
 spicuzza S P IY0 K UW1 T S AH0
 spicy S P AY1 S IY0
-spidel S P IH1 D AH0 L
-spidell S P IH1 D AH0 L
-spider S P AY1 D ER0
-spider-man S P AY1 D ER0 M AE0 N
-spiderman S P AY1 D ER0 M AE0 N
-spiders S P AY1 D ER0 Z
+#spidel S P IH1 D AH0 L
+#spidell S P IH1 D AH0 L
+#spider S P AY1 D ER0
+#spider-man S P AY1 D ER0 M AE0 N
+#spiderman S P AY1 D ER0 M AE0 N
+#spiders S P AY1 D ER0 Z
 spidle S P AY1 D AH0 L
 spie S P IY1
 spied S P AY1 D
@@ -118665,13 +118665,13 @@ swooshed S W UW1 SH T
 swope S W OW1 P
 swopes S W OW1 P S
 swor S W ER1
-sword S AO1 R D
-swordfish S AO1 R D F IH2 SH
-swordfish's S AO1 R D F IH2 SH IH0 Z
-swordlike S AO1 R D L AY2 K
-swordplay S AO1 R D P L EY2
-swordplays S AO1 R D P L EY2 Z
-swords S AO1 R D Z
+#sword S AO1 R D
+#swordfish S AO1 R D F IH2 SH
+#swordfish's S AO1 R D F IH2 SH IH0 Z
+#swordlike S AO1 R D L AY2 K
+#swordplay S AO1 R D P L EY2
+#swordplays S AO1 R D P L EY2 Z
+#swords S AO1 R D Z
 swore S W AO1 R
 sworn S W AO1 R N
 swoveland S W OW1 V L AH0 N D
@@ -122703,13 +122703,13 @@ towbin T OW1 B IH2 N
 towboat T OW1 B OW2 T
 towe T OW1
 towed T OW1 D
-towel T AW1 AH0 L
-towel(2) T AW1 L
-toweling T AW1 AH0 L IH0 NG
-toweling(2) T AW1 L IH0 NG
-towell T AA1 W EH0 L
-towels T AW1 AH0 L Z
-towels(2) T AW1 L Z
+#towel T AW1 AH0 L
+#towel(2) T AW1 L
+#toweling T AW1 AH0 L IH0 NG
+#toweling(2) T AW1 L IH0 NG
+#towell T AA1 W EH0 L
+#towels T AW1 AH0 L Z
+#towels(2) T AW1 L Z
 tower T AW1 ER0
 tower's T AW1 ER0 Z
 towered T AW1 ER0 D
@@ -124223,11 +124223,11 @@ tunison(2) T UW1 N IH0 S AH0 N
 tunkelang T AH2 NG K L AE1 NG
 tunks T AH1 NG K S
 tunku T AH1 NG K UW0
-tunnel T AH1 N AH0 L
-tunnel's T AH1 N AH0 L Z
-tunneling T AH1 N AH0 L IH0 NG
-tunnell T AH1 N AH0 L
-tunnels T AH1 N AH0 L Z
+#tunnel T AH1 N AH0 L
+#tunnel's T AH1 N AH0 L Z
+#tunneling T AH1 N AH0 L IH0 NG
+#tunnell T AH1 N AH0 L
+#tunnels T AH1 N AH0 L Z
 tunney T AH1 N IY0
 tunny T AH1 N IY0
 tunstall T AH1 N S T AH0 L
@@ -129225,7 +129225,7 @@ waller W AO1 L ER0
 wallerstein W AO1 L ER0 S T AY2 N
 wallerstein(2) W AO1 L ER0 S T IY2 N
 walles W AO1 L Z
-wallet W AO1 L AH0 T
+#wallet W AO1 L AH0 T
 wallets W AO1 L AH0 T S
 walley W AO1 L IY0
 walleye W AO1 L AY2

@@ -149,10 +149,33 @@
 {"english_word": "hotel", "italian_transliteration": "hotel"}
 {"english_word": "king", "italian_transliteration": "chingh"}
 {"english_word": "party", "italian_transliteration": "parti"}
+{"english_word": "towel", "italian_transliteration": "tauel"}
+{"english_word": "soap", "italian_transliteration": "sop"}
+{"english_word": "shampoo", "italian_transliteration": "sciampu"}
+{"english_word": "salad", "italian_transliteration": "seled"}
+{"english_word": "bucket", "italian_transliteration": "bachet"}
+{"english_word": "wallet", "italian_transliteration": "uolet"}
+{"english_word": "carpet", "italian_transliteration": "carpet"}
+{"english_word": "plastic", "italian_transliteration": "plestic"}
+{"english_word": "cousin", "italian_transliteration": "casin"}
+{"english_word": "dragon", "italian_transliteration": "dregon"}
+{"english_word": "sword", "italian_transliteration": "sord"}
+{"english_word": "shield", "italian_transliteration": "scild"}
+{"english_word": "helmet", "italian_transliteration": "helmet"}
+{"english_word": "armor", "italian_transliteration": "armor"}
+{"english_word": "magnet", "italian_transliteration": "megnet"}
+{"english_word": "closet", "italian_transliteration": "closet"}
+{"english_word": "tunnel", "italian_transliteration": "tanel"}
+{"english_word": "spider", "italian_transliteration": "spaider"}
+{"english_word": "lizard", "italian_transliteration": "lizard"}
+{"english_word": "falcon", "italian_transliteration": "falcon"}
+{"english_word": "parrot", "italian_transliteration": "perot"}
+{"english_word": "pirate", "italian_transliteration": "pairet"}
+
 
 
 /*non fatto*/
-{"english_word": "fire", "italian_transliteration": "faier"}
+/*{"english_word": "fire", "italian_transliteration": "faier"}
 {"english_word": "food", "italian_transliteration": "fud"}
 {"english_word": "gold", "italian_transliteration": "ghold"}
 {"english_word": "hand", "italian_transliteration": "hend"}
@@ -180,4 +203,31 @@
 {"english_word": "town", "italian_transliteration": "taun"}
 {"english_word": "wind", "italian_transliteration": "uind"}
 {"english_word": "world", "italian_transliteration": "uorld"}
+
+*/
+
+
+{"english_word": "lemon", "italian_transliteration": "lemon"}
+{"english_word": "melon", "italian_transliteration": "melon"}
+{"english_word": "onion", "italian_transliteration": "anion"}
+{"english_word": "garlic", "italian_transliteration": "garlic"}
+{"english_word": "pillow", "italian_transliteration": "pilo"}
+{"english_word": "mirror", "italian_transliteration": "miror"}
+{"english_word": "blanket", "italian_transliteration": "blenchet"}
+{"english_word": "velvet", "italian_transliteration": "velvet"}
+{"english_word": "tiger", "italian_transliteration": "taigher"}
+{"english_word": "zebra", "italian_transliteration": "zibra"}
+{"english_word": "camel", "italian_transliteration": "chemol"}
+{"english_word": "robot", "italian_transliteration": "robot"}
+{"english_word": "magic", "italian_transliteration": "megic"}
+{"english_word": "virus", "italian_transliteration": "vairus"}
+{"english_word": "oasis", "italian_transliteration": "oeisis"}
+{"english_word": "galaxy", "italian_transliteration": "ghelecsi"}
+{"english_word": "comet", "italian_transliteration": "comet"}
+{"english_word": "ocean", "italian_transliteration": "oscen"}
+{"english_word": "jungle", "italian_transliteration": "giangol"}
+{"english_word": "desert", "italian_transliteration": "desert"}
+{"english_word": "puzzle", "italian_transliteration": "pazol"}
+{"english_word": "riddle", "italian_transliteration": "ridol"}
+{"english_word": "bubble", "italian_transliteration": "babol"}
 
