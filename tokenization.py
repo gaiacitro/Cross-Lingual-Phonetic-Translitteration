@@ -1,9 +1,8 @@
 import sentencepiece as spm
 import os
 
+#1. BPETokenizer class for English input using Byte Pair Encoding (BPE)
 class BPETokenizer:
-    """Tokenizer for English input using Byte Pair Encoding (BPE)."""
-    
     def __init__(self, model_path: str = "bpe_english.model"):
         self.sp = spm.SentencePieceProcessor()
         if os.path.exists(model_path):
@@ -23,16 +22,14 @@ class BPETokenizer:
         print(f"BPE model saved as {model_prefix}.model")
 
     def encode(self, text: str) -> list[int]:
-        # encode_as_ids returns the integer IDs, and add_bos/eos handle the special tokens
+        # Encode text to IDs and attach beginning-of-sequence and end-of-sequence tokens
         return [self.sp.bos_id()] + self.sp.encode_as_ids(text) + [self.sp.eos_id()]
         
     def decode(self, ids: list[int]) -> str:
         return self.sp.decode_ids(ids)
 
-
+#2. UnigramTokenizer class for English input using probabilistic subword modeling
 class UnigramTokenizer:
-    """Tokenizer for English input using Unigram language model (probabilistic)."""
-    
     def __init__(self, model_path: str = "unigram_english.model"):
         self.sp = spm.SentencePieceProcessor()
         if os.path.exists(model_path):
@@ -52,20 +49,15 @@ class UnigramTokenizer:
         print(f"Unigram model saved as {model_prefix}.model")
 
     def encode(self, text: str, enable_sampling: bool = False, alpha: float = 0.1) -> list[int]:
-        """
-        Encodes text. If enable_sampling is True, applies Subword Regularization 
-        (essential for Unigram training).
-        """
+        # Encode with optional subword regularization sampling for training
         ids = self.sp.encode(text, enable_sampling=enable_sampling, alpha=alpha, out_type=int)
         return [self.sp.bos_id()] + ids + [self.sp.eos_id()]
         
     def decode(self, ids: list[int]) -> str:
         return self.sp.decode_ids(ids)
 
-
+#3. CharTokenizer class for Italian TFI target output at character level
 class CharTokenizer:
-    """Tokenizer for Italian TFI output at the character level."""
-    
     def __init__(self, model_path: str = "char_italian.model"):
         self.sp = spm.SentencePieceProcessor()
         if os.path.exists(model_path):
@@ -85,12 +77,13 @@ class CharTokenizer:
         print(f"Character model saved as {model_prefix}.model")
 
     def encode(self, text: str) -> list[int]:
+        # Encode character sequence to IDs with bos and eos tokens
         return [self.sp.bos_id()] + self.sp.encode_as_ids(text) + [self.sp.eos_id()]
 
     def decode(self, ids: list[int]) -> str:
         return self.sp.decode_ids(ids)
 
-# --- Entry point to train all models with a single command ---
+#4. Main execution entry point to train and save all tokenizers
 if __name__ == "__main__":
     english_txt = "english_words.txt"
     italian_txt = "italian_transliterations.txt"

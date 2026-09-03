@@ -6,18 +6,10 @@ from torch.nn.utils.rnn import pad_sequence
 from transformers import BartConfig, BartForConditionalGeneration
 from torch.optim import AdamW
 from tqdm import tqdm
-
-# Local module imports
 from tokenization import BPETokenizer, CharTokenizer
 
-# ==========================================
-# 1. DATASET MANAGEMENT
-# ==========================================
+#1. Dataset class to read the JSONL file and provide pairs of (english_word, italian_transliteration)
 class TransliterationDataset(Dataset):
-    """
-    Dataset class for loading English-to-Italian phonetic transliteration pairs.
-    Parses a JSONL file containing 'english_word' and 'italian_transliteration'.
-    """
     def __init__(self, jsonl_file_path: str):
         self.data_pairs = []
         with open(jsonl_file_path, 'r', encoding='utf-8') as file:
@@ -31,14 +23,8 @@ class TransliterationDataset(Dataset):
     def __getitem__(self, index: int) -> tuple:
         return self.data_pairs[index]
 
-# ==========================================
-# 2. COLLATION UTILITIES
-# ==========================================
+#2. Collate function to handle variable-length sequences and padding
 def get_collate_fn(encoder_tokenizer: BPETokenizer, decoder_tokenizer: CharTokenizer):
-    """
-    Returns a collation function that dynamically tokenizes text and pads sequences.
-    Replaces target padding tokens with -100 to mask them during CrossEntropyLoss computation.
-    """
     def collate_fn(batch: list) -> dict:
         source_texts = [item[0] for item in batch]
         target_texts = [item[1] for item in batch]
@@ -56,7 +42,6 @@ def get_collate_fn(encoder_tokenizer: BPETokenizer, decoder_tokenizer: CharToken
 
         # Attention mask creation (1 for valid tokens, 0 for padding tokens)
         attention_mask = (input_ids != pad_id_source).long()
-
         # Mask padding in labels to omit them from the loss gradient computation
         labels[labels == pad_id_target] = -100
 
@@ -64,18 +49,12 @@ def get_collate_fn(encoder_tokenizer: BPETokenizer, decoder_tokenizer: CharToken
             'input_ids': input_ids,
             'attention_mask': attention_mask,
             'labels': labels,
-            'target_texts': target_texts # Preserved as raw text for CER evaluation
+            'target_texts': target_texts
         }
     return collate_fn
 
-# ==========================================
-# 3. EVALUATION METRICS
-# ==========================================
+#3. Evaluation function to compute loss and CER on the validation set
 def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
-    """
-    Evaluates the model on the validation set, computing average validation loss 
-    and Character Error Rate (CER).
-    """
     model.eval()
     total_loss = 0.0
     all_predictions = []
@@ -102,7 +81,7 @@ def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
                 pad_token_id=decoder_tokenizer.sp.pad_id()
             )
 
-            # Decode generation output and compute Levenshtein distance components
+            # Decode generation output and truncate at <eos>
             for gen_ids, ref_text in zip(generated_ids, target_texts):
                 clean_ids = [
                     token_id.item() for token_id in gen_ids 
@@ -111,26 +90,16 @@ def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
                                         decoder_tokenizer.sp.eos_id()]
                 ]
                 pred_text = decoder_tokenizer.decode(clean_ids)
-                
-                # To calculate CER using jiwer's WER function, we inject spaces between characters
                 all_predictions.append(" ".join(list(pred_text)))
                 all_references.append(" ".join(list(ref_text)))
 
     avg_loss = total_loss / len(dataloader)
-    
     # Compute the final CER
     cer = jiwer.wer(all_references, all_predictions) if all_references else 0.0
-    
     return avg_loss, cer
 
-# ==========================================
-# 4. TRAINING PIPELINE
-# ==========================================
+#4. Training function to orchestrate the training process
 def train_bart_architecture():
-    """
-    Main execution pipeline for training the custom BART architecture.
-    Implements an 80/20 train-validation data split.
-    """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Executing on computational device: {device}")
 
@@ -138,12 +107,11 @@ def train_bart_architecture():
     encoder_tokenizer = BPETokenizer("bpe_english.model")
     decoder_tokenizer = CharTokenizer("char_italian.model")
 
-    # Dataset Initialization and Partitioning
     full_dataset = TransliterationDataset("transliteration_dataset.jsonl")
     train_size = int(0.8 * len(full_dataset))
     val_size = len(full_dataset) - train_size
-    
-    # Fix the generator seed to guarantee partition reproducibility across iterations
+
+    #seed for reproducibility
     generator = torch.Generator().manual_seed(42)
     train_dataset, val_dataset = random_split(full_dataset, [train_size, val_size], generator=generator)
 
@@ -182,11 +150,11 @@ def train_bart_architecture():
     # Early Stopping Configuration
     patience = 3
     patience_counter = 0
-    best_val_cer = float('inf')  # We monitor CER as it's the target metric
+    best_val_cer = float('inf')
 
     # Training and Evaluation Epoch Iteration
     for epoch in range(num_epochs):
-        # --- Phase 1: Training ---
+        #Training Phase
         model.train()
         total_train_loss = 0.0
         train_iterator = tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs} [Train]", leave=False)
@@ -208,17 +176,14 @@ def train_bart_architecture():
             train_iterator.set_postfix(loss=loss.item())
             
         avg_train_loss = total_train_loss / len(train_loader)
-
-        # --- Phase 2: Validation ---
+        # Validation Phase
         val_loss, val_cer = evaluate_model(model, val_loader, device, decoder_tokenizer)
 
         print(f"Epoch {epoch+1}/{num_epochs} Completed | Train Loss: {avg_train_loss:.4f} | Val Loss: {val_loss:.4f} | Val CER: {val_cer:.4f}")
 
-        # --- Phase 3: Early Stopping & Model Checkpointing ---
         if val_cer < best_val_cer:
             best_val_cer = val_cer
             patience_counter = 0
-            # Save only when we achieve a new best validation CER
             model.save_pretrained("./bart_bpe_best_model")
             print(f"New best model found (CER: {best_val_cer:.4f})! Weights serialized.")
         else:

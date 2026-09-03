@@ -6,13 +6,9 @@ from torch.utils.data import Dataset, DataLoader, random_split
 from torch.nn.utils.rnn import pad_sequence
 from torch.optim import AdamW
 from tqdm import tqdm
-
-# Importiamo UnigramTokenizer al posto di BPETokenizer
 from tokenization import UnigramTokenizer, CharTokenizer
 
-# ==========================================
-# 1. DATASET 
-# ==========================================
+#1. Dataset class to read the JSONL file and provide pairs of (english_word, italian_transliteration)
 class TransliterationDataset(Dataset):
     def __init__(self, jsonl_file_path: str):
         self.data_pairs = []
@@ -27,15 +23,13 @@ class TransliterationDataset(Dataset):
     def __getitem__(self, index: int) -> tuple:
         return self.data_pairs[index]
 
-# ==========================================
-# 2. COLLATION (CON CAMPIONAMENTO UNIGRAM)
-# ==========================================
+#2. Collate function to handle variable-length sequences, padding, and Unigram sampling
 def get_collate_fn(encoder_tokenizer: UnigramTokenizer, decoder_tokenizer: CharTokenizer, enable_sampling: bool = False):
     def collate_fn(batch: list) -> dict:
         source_texts = [item[0] for item in batch]
         target_texts = [item[1] for item in batch]
 
-        # Applicazione dinamica del campionamento probabilistico
+        # Dynamic application of probabilistic subword sampling
         source_ids = [torch.tensor(encoder_tokenizer.encode(text, enable_sampling=enable_sampling)) for text in source_texts]
         target_ids = [torch.tensor(decoder_tokenizer.encode(text)) for text in target_texts]
 
@@ -56,33 +50,39 @@ def get_collate_fn(encoder_tokenizer: UnigramTokenizer, decoder_tokenizer: CharT
         }
     return collate_fn
 
-# ==========================================
-# ARCHITETTURA: BLSTM CON ATTENTION
-# ==========================================
+#3. Model configuration: Bidirectional LSTM with Attention 
 class Seq2SeqBLSTMAttention(nn.Module):
     def __init__(self, enc_vocab_size, dec_vocab_size, pad_idx, hidden_size=256, num_layers=1):
         super().__init__()
         self.pad_idx = pad_idx
         self.hidden_size = hidden_size
         
+        # Encoder (Bidirectional)
         self.enc_embedding = nn.Embedding(enc_vocab_size, hidden_size, padding_idx=pad_idx)
         self.encoder = nn.LSTM(hidden_size, hidden_size, num_layers, bidirectional=True, batch_first=True)
         
+        # Attention Layers (Bahdanau)
+        # Receives hidden state of the decoder (hidden_size) + encoder output (hidden_size * 2)
         self.attn = nn.Linear(hidden_size * 3, hidden_size)
         self.v = nn.Linear(hidden_size, 1, bias=False)
         
+        # Decoder (Unidirectional)
         self.dec_embedding = nn.Embedding(dec_vocab_size, hidden_size, padding_idx=pad_idx)
+        # Decoder input = current embedding (hidden_size) + context vector from attention (hidden_size * 2)
         self.decoder = nn.LSTM(hidden_size * 3, hidden_size, num_layers, batch_first=True)
         self.fc_out = nn.Linear(hidden_size, dec_vocab_size)
-        
+
+        # Layers to merge the bidirectional hidden states of the encoder and pass them to the decoder
         self.hidden_transform = nn.Linear(hidden_size * 2, hidden_size)
         self.cell_transform = nn.Linear(hidden_size * 2, hidden_size)
         
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-100)
 
     def _calculate_attention(self, hidden, enc_outputs, attention_mask):
+        # hidden_state: (1, batch_size, hidden_size) -> (batch_size, 1, hidden_size)
         h_t = hidden[-1].unsqueeze(1).repeat(1, enc_outputs.size(1), 1)
         
+        # Compute energy scores and attention weights
         energy = torch.tanh(self.attn(torch.cat((h_t, enc_outputs), dim=2)))
         attention_weights = torch.softmax(self.v(energy).squeeze(2), dim=1)
         
@@ -90,6 +90,7 @@ class Seq2SeqBLSTMAttention(nn.Module):
             attention_weights = attention_weights.masked_fill(attention_mask == 0, 1e-10)
             attention_weights = attention_weights / attention_weights.sum(dim=1, keepdim=True)
             
+        # Context vector
         context = torch.bmm(attention_weights.unsqueeze(1), enc_outputs)
         return context
 
@@ -97,8 +98,10 @@ class Seq2SeqBLSTMAttention(nn.Module):
         batch_size = input_ids.size(0)
         enc_embeds = self.enc_embedding(input_ids)
         
+        # Pass through the encoder
         enc_outputs, (hidden, cell) = self.encoder(enc_embeds)
         
+        # Unify the forward and backward directions of the encoder to initialize the decoder
         hidden_cat = torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim=1)
         cell_cat = torch.cat((cell[-2,:,:], cell[-1,:,:]), dim=1)
         
@@ -112,6 +115,7 @@ class Seq2SeqBLSTMAttention(nn.Module):
         dec_embeds = self.dec_embedding(dec_input)
         logits = torch.zeros(batch_size, seq_len, self.fc_out.out_features).to(input_ids.device)
         
+        # Loop through each time step for Teacher Forcing with Attention
         for t in range(seq_len):
             context = self._calculate_attention(hidden, enc_outputs, attention_mask)
             rnn_input = torch.cat((dec_embeds[:, t:t+1, :], context), dim=2)
@@ -159,9 +163,7 @@ class Seq2SeqBLSTMAttention(nn.Module):
             
         return torch.cat(generated_ids, dim=1)
 
-# ==========================================
-# 3. METRICHE E VALUTAZIONE
-# ==========================================
+#4. Evaluation function to compute loss and CER on the validation set
 def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
     model.eval()
     total_loss = 0.0
@@ -187,13 +189,15 @@ def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
                 pad_token_id=decoder_tokenizer.sp.pad_id()
             )
 
-            # Tronca l'estrazione al primo token <eos> incontrato
+            # Decode generation output and truncate at <eos>
             for gen_ids, ref_text in zip(generated_ids, target_texts):
                 clean_ids = []
                 for token_id in gen_ids:
                     t_id = token_id.item()
+                    # if we reach the <eos> token, we stop decoding
                     if t_id == decoder_tokenizer.sp.eos_id():
                         break
+                    # if we encounter padding or bos tokens, we ignore them
                     if t_id not in [decoder_tokenizer.sp.pad_id(), decoder_tokenizer.sp.bos_id()]:
                         clean_ids.append(t_id)
                         
@@ -205,14 +209,12 @@ def evaluate_model(model, dataloader, device, decoder_tokenizer) -> tuple:
     cer = jiwer.wer(all_references, all_predictions) if all_references else 0.0
     return avg_loss, cer
 
-# ==========================================
-# 4. TRAINING PIPELINE
-# ==========================================
+#5. Training function to orchestrate the training process
 def train_blstm_unigram_architecture():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Executing on computational device: {device}")
 
-    # Inizializzazione con Unigram
+    # Initialization with Unigram tokenizer
     encoder_tokenizer = UnigramTokenizer("unigram_english.model")
     decoder_tokenizer = CharTokenizer("char_italian.model")
 
@@ -223,7 +225,7 @@ def train_blstm_unigram_architecture():
     generator = torch.Generator().manual_seed(42)
     train_dataset, val_dataset = random_split(full_dataset, [train_size, val_size], generator=generator)
 
-    # DataLoader con sampling ATTIVATO per il train e DISATTIVATO per il test
+    # DataLoader with sampling enabled for training and disabled for validation
     train_collate = get_collate_fn(encoder_tokenizer, decoder_tokenizer, enable_sampling=True)
     val_collate = get_collate_fn(encoder_tokenizer, decoder_tokenizer, enable_sampling=False)
     
@@ -273,10 +275,15 @@ def train_blstm_unigram_architecture():
 
         print(f"Epoch {epoch+1}/{num_epochs} Completed | Train Loss: {avg_train_loss:.4f} | Val Loss: {val_loss:.4f} | Val CER: {val_cer:.4f}")
 
+        # Save model weights after each epoch starting from the 4th epoch (Epoch 5 onwards)
+        if epoch >= 4:
+            epoch_filename = f"blstm_unigram_epoch_{epoch+1}.pth"
+            torch.save(model.state_dict(), epoch_filename)
+            print(f"Progressive saving: weights from epoch {epoch+1} saved to '{epoch_filename}'")
+
         if val_cer < best_val_cer:
             best_val_cer = val_cer
             patience_counter = 0
-            # Nome aggiornato per il modello Unigram
             torch.save(model.state_dict(), "blstm_att_unigram_best.pth")
             print(f"New best model found (CER: {best_val_cer:.4f})! Weights serialized.")
         else:

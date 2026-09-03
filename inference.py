@@ -3,15 +3,11 @@ import torch
 import jiwer
 from tqdm import tqdm
 from transformers import BartForConditionalGeneration
-from google.colab import files  # Added for automatic download
-
-# Local imports
+from google.colab import files
 from tokenization import BPETokenizer, UnigramTokenizer, CharTokenizer
 from train_blstm_att_bpe import Seq2SeqBLSTMAttention
 
-# ==========================================
-# 1. CENTRAL CONFIGURATION (REGISTRY)
-# ==========================================
+#1. Model registry mapping model identifiers to architectures, tokenizers, and checkpoint paths
 MODEL_REGISTRY = {
     "blstm_att_bpe": {
         "arch": "blstm",
@@ -35,10 +31,8 @@ MODEL_REGISTRY = {
     }
 }
 
+#2. Inference pipeline function to evaluate models on the test set and export reports
 def run_inference(selected_model: str):
-    """
-    Runs inference by dynamically loading the specified model.
-    """
     if selected_model not in MODEL_REGISTRY:
         print(f"Error: The model '{selected_model}' does not exist.")
         print(f"Choose from: {list(MODEL_REGISTRY.keys())}")
@@ -49,9 +43,7 @@ def run_inference(selected_model: str):
     
     print(f"Starting Inference | Model: {selected_model.upper()} | Device: {device}")
 
-    # ==========================================
-    # 2. OBJECT INITIALIZATION
-    # ==========================================
+    # Initialize Tokenization Objects based on selected configuration
     if config["tok"] == "bpe":
         encoder_tokenizer = BPETokenizer("bpe_english.model")
     else:
@@ -59,6 +51,7 @@ def run_inference(selected_model: str):
         
     decoder_tokenizer = CharTokenizer("char_italian.model")
 
+    # Load architecture and pre-trained weights
     if config["arch"] == "bart":
         model = BartForConditionalGeneration.from_pretrained(config["path"])
     else:
@@ -74,15 +67,10 @@ def run_inference(selected_model: str):
     model.to(device)
     model.eval()
 
-    # ==========================================
-    # 3. FILE READING AND GENERATION
-    # ==========================================
     TEST_FILE = "test.jsonl" 
     
     predictions = []
     references = []
-    
-    # Variables to save logs and count prints
     output_logs = []
     printed_count = 0
     MAX_PRINTS = 15
@@ -116,18 +104,20 @@ def run_inference(selected_model: str):
             clean_ids = []
             for t_id in gen_ids:
                 t_id = t_id.item()
+                # Decode generation output and truncate at <eos>
                 if t_id == decoder_tokenizer.sp.eos_id():
                     break
+                # Ignore padding and beginning-of-sequence tokens
                 if t_id not in [decoder_tokenizer.sp.pad_id(), decoder_tokenizer.sp.bos_id()]:
                     clean_ids.append(t_id)
                     
             prediction = decoder_tokenizer.decode(clean_ids)
             
-            # Create the formatted string
+            # Format and store log entry
             log_line = f"EN: {english_word:<15} | TRUE: {ground_truth:<15} | PRED: {prediction}"
             output_logs.append(log_line)
             
-            # Print only the first 15 words to the screen
+            # Print sample transliterations up to the maximum display limit
             if printed_count < MAX_PRINTS:
                 print(log_line)
                 printed_count += 1
@@ -135,9 +125,7 @@ def run_inference(selected_model: str):
             predictions.append(" ".join(list(prediction)))
             references.append(" ".join(list(ground_truth)))
 
-    # ==========================================
-    # 4. EVALUATION AND FILE SAVING
-    # ==========================================
+    # Compute Character Error Rate across the entire test set
     final_cer = jiwer.wer(references, predictions)
     
     header_result = f"\n--- FINAL RESULT ({selected_model.upper()}) ---"
@@ -146,7 +134,7 @@ def run_inference(selected_model: str):
     print(header_result)
     print(text_cer)
     
-    # TXT file generation
+    # Generate and download evaluation report
     output_filename = f"inference_{selected_model}.txt"
     with open(output_filename, 'w', encoding='utf-8') as out_f:
         out_f.write(f"Inference Report - Model: {selected_model.upper()}\n")
