@@ -48,41 +48,41 @@ def convert_cmu_to_tfi(cmu_phonemes):
         if i + 1 < len(cmu_phonemes):
             next_p = ''.join([c for c in cmu_phonemes[i+1] if not c.isdigit()])
 
-        # --- 1. CH (C Morbida: c / ci) ---
+        # --- 1. CH (Soft C: c / ci) ---
         if p_clean == "CH":
             if next_p in front_vowels:
-                tfi_chars.append("c")    # Es: CH + EH -> ce
+                tfi_chars.append("c")    # E.g.: CH + EH -> ce
             elif next_p is None:
-                tfi_chars.append("c")    # Fine parola -> c (es. arc)
+                tfi_chars.append("c")    # End of word -> c (e.g. arc)
             else:
-                tfi_chars.append("ci")   # Davanti ad a/o/u o cons. -> ci
+                tfi_chars.append("ci")   # Before a/o/u or a consonant -> ci
 
-        # --- 2. JH (G Morbida: g / gi) ---
+        # --- 2. JH (Soft G: g / gi) ---
         elif p_clean == "JH":
             if next_p in front_vowels:
-                tfi_chars.append("g")    # Es: JH + EH -> ge
+                tfi_chars.append("g")    # E.g.: JH + EH -> ge
             elif next_p is None:
-                tfi_chars.append("g")    # Fine parola -> g (es. frig)
+                tfi_chars.append("g")    # End of word -> g (e.g. frig)
             else:
-                tfi_chars.append("gi")   # Davanti ad a/o/u o cons. -> gi
+                tfi_chars.append("gi")   # Before a/o/u or a consonant -> gi
 
-        # --- 3. K (C Dura: ch / c) ---
+        # --- 3. K (Hard C: ch / c) ---
         elif p_clean == "K":
             if next_p in front_vowels:
-                tfi_chars.append("ch")   # Es: K + IY -> chi
+                tfi_chars.append("ch")   # E.g.: K + IY -> chi
             elif next_p is None:
-                tfi_chars.append("ch")   # Fine parola -> ch (es. darch)
+                tfi_chars.append("ch")   # End of word -> ch (e.g. darch)
             else:
-                tfi_chars.append("c")    # Davanti ad a/o/u o cons. -> c (es. cloud -> claud)
+                tfi_chars.append("c")    # Before a/o/u or a consonant -> c (e.g. cloud -> claud)
 
-        # --- 4. G (G Dura: gh / g) ---
+        # --- 4. G (Hard G: gh / g) ---
         elif p_clean == "G":
             if next_p in front_vowels:
-                tfi_chars.append("gh")   # Es: G + EY -> ghei
+                tfi_chars.append("gh")   # E.g.: G + EY -> ghei
             elif next_p is None:
-                tfi_chars.append("gh")   # Fine parola -> gh (es. bagh)
+                tfi_chars.append("gh")   # End of word -> gh (e.g. bagh)
             else:
-                tfi_chars.append("g")    # Davanti ad a/o/u o cons. -> g (es. green -> grin)
+                tfi_chars.append("g")    # Before a/o/u or a consonant -> g (e.g. green -> grin)
 
         # --- Mapping standard ---
         else:
@@ -90,7 +90,7 @@ def convert_cmu_to_tfi(cmu_phonemes):
 
     return "".join(tfi_chars)
 
-# Esempi di comportamento:
+# Behavior examples:
 # "fridge" -> ['F', 'R', 'IH1', 'JH'] -> "frig"
 # "arch"   -> ['AA1', 'R', 'CH'] -> "arc"
 # "cloud"  -> ['K', 'L', 'AW1', 'D'] -> "claud"
