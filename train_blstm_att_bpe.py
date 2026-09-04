@@ -271,13 +271,6 @@ def train_blstm_architecture():
 
         print(f"Epoch {epoch+1}/{num_epochs} Completed | Train Loss: {avg_train_loss:.4f} | Val Loss: {val_loss:.4f} | Val CER: {val_cer:.4f}")
 
-        # Save model weights after each epoch starting from the 4th epoch
-        if epoch >= 4: 
-            epoch_filename = f"blstm_bpe_epoch_{epoch+1}.pth"
-            torch.save(model.state_dict(), epoch_filename)
-            print(f"Progressive saving: weights from epoch {epoch+1} saved to '{epoch_filename}'")
-        # ==========================================
-
         if val_cer < best_val_cer:
             best_val_cer = val_cer
             patience_counter = 0
