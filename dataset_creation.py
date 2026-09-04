@@ -2,17 +2,10 @@ import os
 import json
 from typing import List, Dict
 
-# Import ARPABET-to-Italian mapping dictionary from local module
-from mapping_cmu_italian import ARPABET_TO_ITALIAN_MAPPING
+# 1. Importing the mapping function from mapping_cmu_italian.py
+from mapping_cmu_italian import convert_cmu_to_tfi
 
-#1. Helper function to map individual ARPABET phonemes to Italian graphemes
-def get_italian_grapheme(arpabet_symbol: str) -> str:
-    symbol_upper: str = arpabet_symbol.upper()
-    if symbol_upper not in ARPABET_TO_ITALIAN_MAPPING:
-        raise KeyError(f"ARPABET symbol '{symbol_upper}' not found in the mapping.")
-    return ARPABET_TO_ITALIAN_MAPPING[symbol_upper]
-
-#2. Helper function to strip numeric stress markers (0, 1, 2) from phonemes
+# 2. Function to remove stress markers from CMU phonemes
 def remove_stress_markers(phonemes: List[str]) -> List[str]:
     clean_phonemes: List[str] = []
     for phoneme in phonemes:
@@ -20,30 +13,28 @@ def remove_stress_markers(phonemes: List[str]) -> List[str]:
         clean_phonemes.append(clean_phoneme)
     return clean_phonemes
 
-#3. Dataset creation pipeline to process CMU dictionary and write JSONL and TXT files
+# 3. Creation pipeline for dataset
 def create_jsonl_dataset(input_file_path: str, output_file_path: str, 
                          english_txt_path: str, italian_txt_path: str) -> None:
-    """
-    Processes the CMU dictionary and generates:
-    1. A JSONL dataset containing all transliteration pairs and metadata.
-    2. A clean .txt file with English words (for SentencePiece training).
-    3. A clean .txt file with Italian transliterations (for SentencePiece training).
-    """
+    '''
+    Process the CMU dictionary and generate:
+    1. A JSONL dataset with all pairs and metadata.
+    2. A clean .txt file with English words (for SentencePiece).
+    3. A clean .txt file with Italian transliterations (for SentencePiece).
+    '''
     if not os.path.exists(input_file_path):
         raise FileNotFoundError(f"The dictionary file was not found at: {input_file_path}")
 
-    # Open all source and target output streams simultaneously
+    # Open the input and output files
     with open(input_file_path, "r", encoding="utf-8") as infile, \
          open(output_file_path, "w", encoding="utf-8") as outfile_jsonl, \
          open(english_txt_path, "w", encoding="utf-8") as outfile_en, \
          open(italian_txt_path, "w", encoding="utf-8") as outfile_it:
         
         for line in infile:
-            # Handle inline comments and leakage filters
             if "#" in line:
                 line = line.split("#")[0]
             
-            # Skip dictionary comments or empty lines
             if line.startswith(";") or not line.strip():
                 continue
             
@@ -57,13 +48,18 @@ def create_jsonl_dataset(input_file_path: str, output_file_path: str,
             cmu_clean: str = " ".join(clean_phonemes_list)
             
             try:
-                italian_chars: List[str] = [get_italian_grapheme(p) for p in clean_phonemes_list]
-                italian_transliteration: str = "".join(italian_chars)
-            except KeyError as error:
+                # Pass the entire list to the function to allow lookahead
+                italian_transliteration: str = convert_cmu_to_tfi(clean_phonemes_list)
+
+                # Security check to ensure the function does not return an empty string due to unexpected errors
+                if not italian_transliteration:
+                    raise ValueError("Empty transliteration generated.")
+                    
+            except Exception as error:
                 print(f"Skipping word '{english_word}': {error}")
                 continue
             
-            # Serialize structured entry to JSONL
+            # Save the dataset entry in JSONL format
             dataset_entry: Dict[str, str] = {
                 "english_word": english_word,
                 "cmu_with_stress": cmu_with_stress,
@@ -73,11 +69,11 @@ def create_jsonl_dataset(input_file_path: str, output_file_path: str,
             json_string: str = json.dumps(dataset_entry, ensure_ascii=False)
             outfile_jsonl.write(json_string + "\n")
 
-            # Write clean text lines for SentencePiece tokenizer training
+            # Save the text files for SentencePiece
             outfile_en.write(english_word + "\n")
             outfile_it.write(italian_transliteration + "\n")
 
-#4. Main execution entry point
+# 4. Entry point
 if __name__ == "__main__":
     dict_input_path: str = "cmudict.dict"
     dataset_output_path: str = "transliteration_dataset.jsonl"

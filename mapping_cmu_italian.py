@@ -1,46 +1,97 @@
-from typing import Dict
+def convert_cmu_to_tfi(cmu_phonemes):
+    front_vowels = {"EH", "EY", "IH", "IY", "ER"}
 
-ARPABET_TO_ITALIAN_MAPPING: Dict[str, str] = {
-    # --- Vowels ---
-    "AA": "a",   # e.g., 'odd' -> a
-    "AE": "a",   # e.g., 'at' -> a
-    "AH": "a",   # e.g., 'hut' -> a
-    "AO": "o",   # e.g., 'ought' -> o
-    "AW": "au",  # e.g., 'cow' -> au
-    "AY": "ai",  # e.g., 'hide' -> ai
-    "EH": "e",   # e.g., 'Ed' -> e
-    "ER": "er",  # e.g., 'hurt' -> er (rhotic vowel)
-    "EY": "ei",  # e.g., 'ate' -> ei
-    "IH": "i",   # e.g., 'it' -> i
-    "IY": "i",   # e.g., 'eat' -> i
-    "OW": "ou",  # e.g., 'oat' -> ou
-    "OY": "oi",  # e.g., 'toy' -> oi
-    "UH": "u",   # e.g., 'hood' -> u
-    "UW": "u",   # e.g., 'two' -> u
+    base_mapping = {
+        "AA": "a", 
+        "AE": "a", 
+        "AH": "a", 
+        "AO": "o", 
+        "AW": "au", 
+        "AY": "ai",
+        "EH": "e", 
+        "ER": "er", 
+        "EY": "ei", 
+        "IH": "i", 
+        "IY": "i", 
+        "OW": "ou",
+        "OY": "oi", 
+        "UH": "u", 
+        "UW": "u", 
+        "B": "b", 
+        "D": "d", 
+        "DH": "d",
+        "F": "f", 
+        "HH": "h", 
+        "L": "l", 
+        "M": "m", 
+        "N": "n", 
+        "NG": "ngh", 
+        "P": "p", 
+        "R": "r", 
+        "S": "s", 
+        "SH": "sci", 
+        "T": "t", 
+        "TH": "t", 
+        "V": "v", 
+        "W": "u", 
+        "Y": "i", 
+        "Z": "z", 
+        "ZH": "sci"
+    }
 
-    # --- Consonants ---
-    "B": "b",    # e.g., 'be' -> b
-    "CH": "ci",  # e.g., 'cheese' -> ci (soft 'c' sound in Italian)
-    "D": "d",    # e.g., 'dee' -> d
-    "DH": "d",   # e.g., 'thee' -> d (Italian lacks dental fricatives, mapped to 'd')
-    "F": "f",    # e.g., 'fee' -> f
-    "G": "gh",    # e.g., 'green' -> g (hard 'g' sound)
-    "HH": "h",   # e.g., 'he' -> h (often silent in Italian, but kept for model pattern learning)
-    "JH": "g",  # e.g., 'gee' -> gi (soft 'g' sound in Italian)
-    "K": "ch",    # e.g., 'key' -> k (unambiguous hard sound compared to Italian 'c'/'ch')
-    "L": "l",    # e.g., 'lee' -> l
-    "M": "m",    # e.g., 'me' -> m
-    "N": "n",    # e.g., 'knee' -> n
-    "NG": "ngh",  # e.g., 'ping' -> ng
-    "P": "p",    # e.g., 'pee' -> p
-    "R": "r",    # e.g., 'read' -> r
-    "S": "s",    # e.g., 'sea' -> s
-    "SH": "sci", # e.g., 'she' -> sci (unambiguous soft 'sc' sound in Italian)
-    "T": "t",    # e.g., 'tea' -> t
-    "TH": "t",   # e.g., 'theta' -> t (unvoiced dental fricative mapped to 't')
-    "V": "v",    # e.g., 'vee' -> v
-    "W": "u",    # e.g., 'we' -> u (semivowel mapped to 'u')
-    "Y": "i",    # e.g., 'yield' -> i (semivowel mapped to 'i')
-    "Z": "z",    # e.g., 'zee' -> z
-    "ZH": "sci"    # e.g., 'seizure' -> j (approximate mapping for voiced postalveolar fricative)
-}
+    tfi_chars = []
+    
+    for i, phoneme in enumerate(cmu_phonemes):
+        p_clean = ''.join([c for c in phoneme if not c.isdigit()])
+
+        next_p = None
+        if i + 1 < len(cmu_phonemes):
+            next_p = ''.join([c for c in cmu_phonemes[i+1] if not c.isdigit()])
+
+        # --- 1. CH (C Morbida: c / ci) ---
+        if p_clean == "CH":
+            if next_p in front_vowels:
+                tfi_chars.append("c")    # Es: CH + EH -> ce
+            elif next_p is None:
+                tfi_chars.append("c")    # Fine parola -> c (es. arc)
+            else:
+                tfi_chars.append("ci")   # Davanti ad a/o/u o cons. -> ci
+
+        # --- 2. JH (G Morbida: g / gi) ---
+        elif p_clean == "JH":
+            if next_p in front_vowels:
+                tfi_chars.append("g")    # Es: JH + EH -> ge
+            elif next_p is None:
+                tfi_chars.append("g")    # Fine parola -> g (es. frig)
+            else:
+                tfi_chars.append("gi")   # Davanti ad a/o/u o cons. -> gi
+
+        # --- 3. K (C Dura: ch / c) ---
+        elif p_clean == "K":
+            if next_p in front_vowels:
+                tfi_chars.append("ch")   # Es: K + IY -> chi
+            elif next_p is None:
+                tfi_chars.append("ch")   # Fine parola -> ch (es. darch)
+            else:
+                tfi_chars.append("c")    # Davanti ad a/o/u o cons. -> c (es. cloud -> claud)
+
+        # --- 4. G (G Dura: gh / g) ---
+        elif p_clean == "G":
+            if next_p in front_vowels:
+                tfi_chars.append("gh")   # Es: G + EY -> ghei
+            elif next_p is None:
+                tfi_chars.append("gh")   # Fine parola -> gh (es. bagh)
+            else:
+                tfi_chars.append("g")    # Davanti ad a/o/u o cons. -> g (es. green -> grin)
+
+        # --- Mapping standard ---
+        else:
+            tfi_chars.append(base_mapping.get(p_clean, ""))
+
+    return "".join(tfi_chars)
+
+# Esempi di comportamento:
+# "fridge" -> ['F', 'R', 'IH1', 'JH'] -> "frig"
+# "arch"   -> ['AA1', 'R', 'CH'] -> "arc"
+# "cloud"  -> ['K', 'L', 'AW1', 'D'] -> "claud"
+# "king"   -> ['K', 'IH1', 'NG'] -> "chingh"
