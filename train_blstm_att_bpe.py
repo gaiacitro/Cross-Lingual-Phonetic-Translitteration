@@ -274,7 +274,7 @@ def train_blstm_architecture():
         if val_cer < best_val_cer:
             best_val_cer = val_cer
             patience_counter = 0
-            torch.save(model.state_dict(), "blstm_bpe_best_model.pth")
+            torch.save(model.state_dict(), "blstm_att_bpe_best.pth")
             print(f"New best model found (CER: {best_val_cer:.4f})! Weights serialized.")
         else:
             patience_counter += 1
