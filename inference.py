@@ -128,8 +128,6 @@ def run_inference(selected_model: str):
     # Compute Character Error Rate across the entire test set
     final_cer = jiwer.wer(references, predictions)
 
-    print(prediction)
-    print(references)
     
     header_result = f"\n--- FINAL RESULT ({selected_model.upper()}) ---"
     text_cer = f"Character Error Rate (CER): {final_cer:.4f}"
