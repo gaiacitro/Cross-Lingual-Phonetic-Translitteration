@@ -24,7 +24,7 @@ Developed for the NLP course project, Sapienza University of Rome (2024–2025).
 | `train_bart_bpe.py` | Trains a from-scratch BART (Hugging Face `BartForConditionalGeneration`) with BPE-tokenized English input. |
 | `train_bart_unigram.py` | Trains a from-scratch BART with Unigram-tokenized English input. |
 | `inference.py` | Loads a trained checkpoint and runs transliteration inference on new/held-out words. |
-| `Cross_Lingual_Phonetic_Translitteration.ipynb` | Google Colab notebook that orchestrates the entire pipeline end-to-end on a GPU runtime — see [Running on Google Colab](#running-on-google-colab) below. |
+| *(external)* `Cross_Lingual_Phonetic_Translitteration.ipynb` | Google Colab notebook (hosted on Google Drive, not committed to this repo) that orchestrates the entire pipeline end-to-end on a GPU runtime — see [Running on Google Colab](#running-on-google-colab) below. |
 
 **Data**
 
@@ -32,8 +32,7 @@ Developed for the NLP course project, Sapienza University of Rome (2024–2025).
 |---|---|
 | `cmudict.dict` | The CMU Pronouncing Dictionary (v0.7b) with the entries corresponding to the hold-out test set commented out, so that `dataset_creation.py` excludes them from training — this is the file actually used to build the training data (see [Data](#data) below). |
 | `cmudict_complete.dict` | The original, unmodified CMU Pronouncing Dictionary (v0.7b), provided for reference/reproducibility. |
-| `test.jsonl` | The manually curated hold-out test set (300 English words) used for final evaluation. |
-| `ground_truth.txt` | Reference Italian transliterations for the test set, aligned with `test.jsonl`, used to compute the test CER. |
+| `test.jsonl` | The manually curated hold-out test set (300 English words, with reference Italian transliterations) used for final evaluation. |
 | `english_words.txt` *(generated)* | Plain list of English words, output of `dataset_creation.py`, used to train the source-side tokenizers. |
 | `italian_transliterations.txt` *(generated)* | Plain list of Italian transliterations, output of `dataset_creation.py`, used to train the target-side tokenizer. |
 | `transliteration_dataset.jsonl` *(generated)* | Full parallel training/validation dataset, output of `dataset_creation.py`. |
@@ -97,7 +96,7 @@ Each script:
 
 All the code in this repository was actually orchestrated and run through a single Google Colab notebook (`Cross_Lingual_Phonetic_Translitteration.ipynb`), which wraps the pipeline above into GPU-backed cells: [colab.research.google.com/drive/1U2hLqS_U1mc61Toaph2MWMwwZC9Qkb-I](https://colab.research.google.com/drive/1U2hLqS_U1mc61Toaph2MWMwwZC9Qkb-I?usp=sharing)
 
-> This link points to the notebook's original location on Google Drive, which may require explicit sharing/access permissions. If it's not accessible, use the copy of the notebook included in this repository instead.
+> This link points to the notebook's original location on Google Drive, which may require explicit sharing/access permissions.
 
 Its structure mirrors the pipeline one-to-one:
 
@@ -112,12 +111,14 @@ To reproduce the results, open the notebook in Colab with a GPU runtime and run 
 
 ---
 
+## Data
+
 The repository includes two versions of the CMU Pronouncing Dictionary (v0.7b):
 
 - **`cmudict.dict`** — the dictionary with the entries corresponding to the hold-out test set (`test.jsonl`) commented out. **This is the file `dataset_creation.py` should be pointed at**, so that test words (and their transliterations) never enter the training/validation split.
 - **`cmudict_complete.dict`** — the original, unmodified dictionary, provided for reference/reproducibility.
 
-The test set itself — 300 manually transcribed English words — lives in `test.jsonl`, with the corresponding reference Italian transliterations in `ground_truth.txt`, used together to compute the final test CER (see [`inference.py`](#repository-structure)).
+The test set itself — 300 manually transcribed English words, together with their reference Italian transliterations — lives in `test.jsonl`, used to compute the final test CER (see [`inference.py`](#repository-structure)).
 
 > **If you extend the test set with new words**, remember to comment out those entries in `cmudict.dict` (or otherwise remove them, together with any morphologically related neighbors) before re-running `dataset_creation.py`. Otherwise the new test words — or close variants of them — may leak into the training data, inflating the model's apparent performance on them.
 
