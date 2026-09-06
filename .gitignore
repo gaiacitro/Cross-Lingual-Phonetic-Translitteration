@@ -4,8 +4,8 @@
 !*.dict
 !*.txt
 !test.jsonl
-!cmudict.dict
-
+!Citro_Fornetti_HWP_report.pdf
+!Cross_Lingual_Phonetic_Translitteration.ipynb
 !.gitignore
 
 bart_bpe_best_model/
