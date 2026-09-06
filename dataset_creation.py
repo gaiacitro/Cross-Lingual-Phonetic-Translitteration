@@ -3,7 +3,7 @@ import json
 from typing import List, Dict
 
 # 1. Importing the mapping function from mapping_cmu_italian.py
-from mapping_cmu_italian import convert_cmu_to_tfi
+from mapping_cmu_italian import convert_cmu_to_ipt
 
 # 2. Function to remove stress markers from CMU phonemes
 def remove_stress_markers(phonemes: List[str]) -> List[str]:
@@ -49,7 +49,7 @@ def create_jsonl_dataset(input_file_path: str, output_file_path: str,
             
             try:
                 # Pass the entire list to the function to allow lookahead
-                italian_transliteration: str = convert_cmu_to_tfi(clean_phonemes_list)
+                italian_transliteration: str = convert_cmu_to_ipt(clean_phonemes_list)
 
                 # Security check to ensure the function does not return an empty string due to unexpected errors
                 if not italian_transliteration:

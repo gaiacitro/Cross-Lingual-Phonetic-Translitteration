@@ -1,13 +1,11 @@
-# Ignora tutti i file e le cartelle
 *
 
-# Eccezioni: includi i file .py e .dict
 !*.py
 !*.dict
 !*.txt
 !test.jsonl
+!cmudict.dict
 
-# Opzionale ma raccomandato: evita di ignorare il file .gitignore stesso
 !.gitignore
 
 bart_bpe_best_model/

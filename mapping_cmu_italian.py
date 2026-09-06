@@ -1,4 +1,5 @@
-def convert_cmu_to_tfi(cmu_phonemes):
+# Mapping from CMU Phonetic Symbols to Italian Phonetic Transliteration
+def convert_cmu_to_ipt(cmu_phonemes):
     front_vowels = {"EH", "EY", "IH", "IY", "ER"}
 
     base_mapping = {

@@ -56,7 +56,7 @@ class UnigramTokenizer:
     def decode(self, ids: list[int]) -> str:
         return self.sp.decode_ids(ids)
 
-#3. CharTokenizer class for Italian TFI target output at character level
+#3. CharTokenizer class for Italian target output at character level
 class CharTokenizer:
     def __init__(self, model_path: str = "char_italian.model"):
         self.sp = spm.SentencePieceProcessor()
