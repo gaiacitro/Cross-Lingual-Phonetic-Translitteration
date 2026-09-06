@@ -145,8 +145,8 @@ Evaluated on a manually curated hold-out test set of 300 English words, using Ch
 | BART (Scratch) | Unigram | 0.0777 | 0.1262 |
 | BART (Scratch) | BPE | 0.0772 | 0.1329 |
 
-Full methodology, error analysis, and discussion are available in the accompanying paper. 
-./Citro_Fornetti_HWP_report.pdf
+Full methodology, error analysis, and discussion are available in the accompanying paper:
+[Citro_Fornetti_HWP_report.pdf](Citro_Fornetti_HWP_report.pdf)
 
 ---
 
