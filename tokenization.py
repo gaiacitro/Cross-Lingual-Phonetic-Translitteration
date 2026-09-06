@@ -65,7 +65,7 @@ class CharTokenizer:
             
     @classmethod
     def train(cls, input_file: str, model_prefix: str = "char_italian", vocab_size: int = 40):
-        print("Training Character-level Tokenizer for Italian TFI...")
+        print("Training Character-level Tokenizer for IPT (Italian Phonetic Transliteration)...")
         spm.SentencePieceTrainer.train(
             input=input_file,
             model_prefix=model_prefix,

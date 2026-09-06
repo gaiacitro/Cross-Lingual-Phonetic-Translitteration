@@ -12,7 +12,7 @@ MODEL_REGISTRY = {
     "blstm_att_bpe": {
         "arch": "blstm",
         "tok": "bpe",
-        "path": "best_models/blstm_bpe_best_model.pth"
+        "path": "best_models/blstm_att_bpe_best.pth"
     },
     "blstm_att_unigram": {
         "arch": "blstm",

@@ -40,7 +40,7 @@ def convert_cmu_to_ipt(cmu_phonemes):
         "ZH": "sci"
     }
 
-    tfi_chars = []
+    ipt_chars = []
     
     for i, phoneme in enumerate(cmu_phonemes):
         p_clean = ''.join([c for c in phoneme if not c.isdigit()])
@@ -52,44 +52,44 @@ def convert_cmu_to_ipt(cmu_phonemes):
         # --- 1. CH (Soft C: c / ci) ---
         if p_clean == "CH":
             if next_p in front_vowels:
-                tfi_chars.append("c")    # E.g.: CH + EH -> ce
+                ipt_chars.append("c")    # E.g.: CH + EH -> ce
             elif next_p is None:
-                tfi_chars.append("c")    # End of word -> c (e.g. arc)
+                ipt_chars.append("c")    # End of word -> c (e.g. arc)
             else:
-                tfi_chars.append("ci")   # Before a/o/u or a consonant -> ci
+                ipt_chars.append("ci")   # Before a/o/u or a consonant -> ci
 
         # --- 2. JH (Soft G: g / gi) ---
         elif p_clean == "JH":
             if next_p in front_vowels:
-                tfi_chars.append("g")    # E.g.: JH + EH -> ge
+                ipt_chars.append("g")    # E.g.: JH + EH -> ge
             elif next_p is None:
-                tfi_chars.append("g")    # End of word -> g (e.g. frig)
+                ipt_chars.append("g")    # End of word -> g (e.g. frig)
             else:
-                tfi_chars.append("gi")   # Before a/o/u or a consonant -> gi
+                ipt_chars.append("gi")   # Before a/o/u or a consonant -> gi
 
         # --- 3. K (Hard C: ch / c) ---
         elif p_clean == "K":
             if next_p in front_vowels:
-                tfi_chars.append("ch")   # E.g.: K + IY -> chi
+                ipt_chars.append("ch")   # E.g.: K + IY -> chi
             elif next_p is None:
-                tfi_chars.append("ch")   # End of word -> ch (e.g. darch)
+                ipt_chars.append("ch")   # End of word -> ch (e.g. darch)
             else:
-                tfi_chars.append("c")    # Before a/o/u or a consonant -> c (e.g. cloud -> claud)
+                ipt_chars.append("c")    # Before a/o/u or a consonant -> c (e.g. cloud -> claud)
 
         # --- 4. G (Hard G: gh / g) ---
         elif p_clean == "G":
             if next_p in front_vowels:
-                tfi_chars.append("gh")   # E.g.: G + EY -> ghei
+                ipt_chars.append("gh")   # E.g.: G + EY -> ghei
             elif next_p is None:
-                tfi_chars.append("gh")   # End of word -> gh (e.g. bagh)
+                ipt_chars.append("gh")   # End of word -> gh (e.g. bagh)
             else:
-                tfi_chars.append("g")    # Before a/o/u or a consonant -> g (e.g. green -> grin)
+                ipt_chars.append("g")    # Before a/o/u or a consonant -> g (e.g. green -> grin)
 
         # --- Mapping standard ---
         else:
-            tfi_chars.append(base_mapping.get(p_clean, ""))
+            ipt_chars.append(base_mapping.get(p_clean, ""))
 
-    return "".join(tfi_chars)
+    return "".join(ipt_chars)
 
 # Behavior examples:
 # "fridge" -> ['F', 'R', 'IH1', 'JH'] -> "frig"

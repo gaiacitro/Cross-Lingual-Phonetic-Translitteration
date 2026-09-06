@@ -144,7 +144,8 @@ Evaluated on a manually curated hold-out test set of 300 English words, using Ch
 | BART (Scratch) | Unigram | 0.0777 | 0.1262 |
 | BART (Scratch) | BPE | 0.0772 | 0.1329 |
 
-Full methodology, error analysis, and discussion are available in the accompanying paper.
+Full methodology, error analysis, and discussion are available in the accompanying paper. 
+./Citro_Fornetti_HWP_report.pdf
 
 ---
 
@@ -153,4 +154,4 @@ Full methodology, error analysis, and discussion are available in the accompanyi
 - **Gaia Citro** — `citro.2026094@studenti.uniroma1.it`
 - **Lucia Fornetti** — `fornetti.2214370@studenti.uniroma1.it`
 
-Sapienza University of Rome — NLP 2024–2025
+Sapienza University of Rome — NLP 2025–2026
