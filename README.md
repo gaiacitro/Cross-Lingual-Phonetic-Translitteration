@@ -44,7 +44,7 @@ python train_bart_unigram.py
 ```
 
 ### 1. Dataset generation — `dataset_creation.py`
-Reads `cmudict.dict`, filters out comments/variant markers (e.g. `word(2)`), strips numeric stress from the ARPABET phonemes, and converts each entry into an Italian transliteration via `mapping_cmu_italian.convert_cmu_to_tfi`. Produces:
+Reads `cmudict.dict`, filters out comments/variant markers (e.g. `word(2)`), strips numeric stress from the ARPABET phonemes, and converts each entry into an Italian transliteration via `mapping_cmu_italian.convert_cmu_to_ipt`. Produces:
 - `transliteration_dataset.jsonl` — one JSON object per line: `english_word`, `cmu_with_stress`, `cmu_clean`, `italian_transliteration`.
 - `english_words.txt` — plain list of English words, used to train the source-side tokenizers.
 - `italian_transliterations.txt` — plain list of Italian transliterations, used to train the target-side tokenizer.
